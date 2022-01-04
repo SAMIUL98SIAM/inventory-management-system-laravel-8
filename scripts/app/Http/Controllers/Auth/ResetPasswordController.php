@@ -34,10 +34,14 @@ class ResetPasswordController extends Controller
         {
             return route('home');
         }
-        elseif(Auth()->user()->usertype == 'student')
+        else
         {
-            dd('sorry! not updated student dashboard');
-            //return route('home');
+            return redirect()->back()->with('error','not for others');
         }
+        // elseif(Auth()->user()->usertype == 'student')
+        // {
+        //     dd('sorry! not updated student dashboard');
+        //     //return route('home');
+        // }
     }
 }
