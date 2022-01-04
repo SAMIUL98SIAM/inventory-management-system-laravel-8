@@ -110,24 +110,6 @@
                 </ul>
             </li>
 
-            <li class="nav-item has-treeview {{$prefix=='/communicates'?'menu-open':''}}">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-copy"></i>
-                  <p>
-                    Communicate Management
-                    <i class="fas fa-angle-left right"></i>
-                    {{-- <span class="badge badge-info right">6</span> --}}
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{route('communicates.view')}}" class="nav-link {{$route=='communicates.view'?'active':''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>View Communicate</p>
-                    </a>
-                  </li>
-                </ul>
-            </li>
 
             <li class="nav-item has-treeview {{$prefix=='/contacts'?'menu-open':''}}">
                 <a href="#" class="nav-link">
@@ -162,6 +144,26 @@
                     <a href="{{route('abouts.view')}}" class="nav-link {{$route=='abouts.view'?'active':''}}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>View About</p>
+                    </a>
+                  </li>
+                </ul>
+            </li>
+
+
+            <li class="nav-item has-treeview {{$prefix=='/suppliers'?'menu-open':''}}">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>
+                    About Supplier
+                    <i class="fas fa-angle-left right"></i>
+                    {{-- <span class="badge badge-info right">6</span> --}}
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('suppliers.view')}}" class="nav-link {{$route=='suppliers.view'?'active':''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>View Supplier</p>
                     </a>
                   </li>
                 </ul>

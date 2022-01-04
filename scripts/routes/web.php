@@ -38,12 +38,6 @@ Route::group(['middleware'=>['auth','admin']],function (){
         Route::post('/change-password/update',[\App\Http\Controllers\Admin\ProfileController::class,'passworUpdate'])->name('profiles.change-password.update');
     });
 
-    Route::prefix('communicates')->group(function(){
-        Route::get('/view',[\App\Http\Controllers\Admin\CommunicateController::class,'index'])->name('communicates.view');
-        Route::get('/delete/{id}',[\App\Http\Controllers\Admin\CommunicateController::class,'destroy'])->name('communicates.delete');
-    });
-
-
     Route::prefix('logos')->group(function(){
         Route::get('/view',[\App\Http\Controllers\Admin\LogoController::class,'index'])->name('logos.view');
         Route::get('/create',[\App\Http\Controllers\Admin\LogoController::class,'create'])->name('logos.create');
@@ -81,5 +75,13 @@ Route::group(['middleware'=>['auth','admin']],function (){
         Route::get('/edit/{id}',[\App\Http\Controllers\Admin\AboutController::class,'edit'])->name('abouts.edit');
         Route::post('/update/{id}',[\App\Http\Controllers\Admin\AboutController::class,'update'])->name('abouts.update');
         Route::get('/delete/{id}',[\App\Http\Controllers\Admin\AboutController::class,'destroy'])->name('abouts.delete');
+    });
+
+
+    Route::prefix('suppliers')->group(function(){
+        Route::get('/view',[\App\Http\Controllers\Admin\SupplierController::class,'index'])->name('suppliers.view');
+        Route::post('/create',[\App\Http\Controllers\Admin\SupplierController::class,'store'])->name('suppliers.store');
+        Route::put('/update/{id}',[\App\Http\Controllers\Admin\SupplierController::class,'update'])->name('suppliers.update');
+        Route::get('/delete/{id}',[\App\Http\Controllers\Admin\SupplierController::class,'destroy'])->name('suppliers.delete');
     });
 });
