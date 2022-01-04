@@ -91,7 +91,7 @@
                 </ul>
             </li>
 
-            <li class="nav-item has-treeview {{$prefix=='/logos'?'menu-open':''}}">
+            <li class="nav-item has-treeview {{$prefix=='/sliders'?'menu-open':''}}">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-copy"></i>
                   <p>
@@ -166,131 +166,6 @@
                   </li>
                 </ul>
             </li>
-
-            <li class="nav-item has-treeview {{$prefix=='/categories'?'menu-open':''}}">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-copy"></i>
-                  <p>
-                    Category Management
-                    <i class="fas fa-angle-left right"></i>
-                    {{-- <span class="badge badge-info right">6</span> --}}
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{route('categories.view')}}" class="nav-link {{$route=='categories.view'?'active':''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>View Category</p>
-                    </a>
-                  </li>
-                </ul>
-            </li>
-
-            <li class="nav-item has-treeview {{$prefix=='/colors'?'menu-open':''}}">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-copy"></i>
-                  <p>
-                    Color Management
-                    <i class="fas fa-angle-left right"></i>
-                    {{-- <span class="badge badge-info right">6</span> --}}
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{route('colors.view')}}" class="nav-link {{$route=='colors.view'?'active':''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>View Color</p>
-                    </a>
-                  </li>
-                </ul>
-            </li>
-
-            <li class="nav-item has-treeview {{$prefix=='/brands'?'menu-open':''}}">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-copy"></i>
-                  <p>
-                    Brand Management
-                    <i class="fas fa-angle-left right"></i>
-                    {{-- <span class="badge badge-info right">6</span> --}}
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{route('brands.view')}}" class="nav-link {{$route=='brands.view'?'active':''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>View Brand</p>
-                    </a>
-                  </li>
-                </ul>
-            </li>
-
-            <li class="nav-item has-treeview {{$prefix=='/sizes'?'menu-open':''}}">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-copy"></i>
-                  <p>
-                    Size Management
-                    <i class="fas fa-angle-left right"></i>
-                    {{-- <span class="badge badge-info right">6</span> --}}
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{route('sizes.view')}}" class="nav-link {{$route=='sizes.view'?'active':''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>View Size</p>
-                    </a>
-                  </li>
-                </ul>
-            </li>
-
-            <li class="nav-item has-treeview {{$prefix=='/products'?'menu-open':''}}">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-copy"></i>
-                  <p>
-                    Product Management
-                    <i class="fas fa-angle-left right"></i>
-                    {{-- <span class="badge badge-info right">6</span> --}}
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{route('products.view')}}" class="nav-link {{$route=='products.view'?'active':''}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>View Product</p>
-                    </a>
-                  </li>
-                </ul>
-            </li>
-
-            <li class="nav-item has-treeview {{$prefix=='/orders'?'menu-open':''}}">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-copy"></i>
-                  <p>
-                    Manage Order
-                    <i class="fas fa-angle-left right"></i>
-                    {{-- <span class="badge badge-info right">6</span> --}}
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-
-                    <li class="nav-item">
-                        <a href="{{route('orders.pending.list')}}" class="nav-link {{$route=='orders.pending.list'?'active':''}}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Pending Order</p>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{route('orders.approved.list')}}" class="nav-link {{$route=='orders.approved.list'?'active':''}}">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Approved Order</p>
-                        </a>
-                    </li>
-
-                </ul>
-            </li>
-
-
         </ul>
     </nav>
 </aside>

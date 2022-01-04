@@ -10,8 +10,8 @@
         Postcode/Zip
         </address>
         <ul class="nospace">
-          <li class="btmspace-10"><span class="fa fa-phone"></span> +00 (123) 456 7890</li>
-          <li><span class="fa fa-envelope-o"></span> info@domain.com</li>
+          <li class="btmspace-10"><span class="fa fa-phone"></span> {{$contact->mobile_no}}</li>
+          <li><span class="fa fa-envelope-o"></span> {{$contact->email}}</li>
         </ul>
       </div>
       <div class="one_quarter">

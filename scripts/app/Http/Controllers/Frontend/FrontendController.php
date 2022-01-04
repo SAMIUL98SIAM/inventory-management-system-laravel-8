@@ -19,11 +19,15 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        return view('frontend.pages.home');
+        $data['contact'] = Contact::first();
+        $data['logo'] = Logo::first();
+        return view('frontend.pages.home',$data);
     }
 
     public function gallary()
     {
-        return view('frontend.pages.gallary');
+        $data['contact'] = Contact::first();
+        $data['logo'] = Logo::first();
+        return view('frontend.pages.gallary',$data);
     }
 }

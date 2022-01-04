@@ -3,19 +3,17 @@
       <!-- ################################################################################################ -->
       <div class="fl_left">
         <ul class="nospace inline pushright">
-          <li><i class="fa fa-phone"></i> +00 (123) 456 7890</li>
-          <li><i class="fa fa-envelope-o"></i> info@domain.com</li>
+          <li><i class="fa fa-phone"></i> {{$contact->mobile_no}}</li>
+          <li><i class="fa fa-envelope-o"></i> {{$contact->email}}</li>
         </ul>
       </div>
       <div class="fl_right">
         <ul class="faico clear">
-          <li><a class="faicon-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-          <li><a class="faicon-pinterest" href="#"><i class="fa fa-pinterest"></i></a></li>
-          <li><a class="faicon-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-          <li><a class="faicon-dribble" href="#"><i class="fa fa-dribbble"></i></a></li>
-          <li><a class="faicon-linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-          <li><a class="faicon-google-plus" href="#"><i class="fa fa-google-plus"></i></a></li>
-          <li><a class="faicon-rss" href="#"><i class="fa fa-rss"></i></a></li>
+          <li><a class="faicon-facebook" href="{{$contact->facebook}}"><i class="fa fa-facebook"></i></a></li>
+          <li><a class="faicon-twitter" href="{{$contact->twitter}}"><i class="fa fa-twitter"></i></a></li>
+          <li><a class="faicon-youtube" href="{{$contact->youtube}}"><i class="fa fa-youtube"></i></a></li>
+          <li><a class="faicon-linkedin" href="{{$contact->linkedin}}"><i class="fa fa-linkedin"></i></a></li>
+          <li><a class="faicon-google-plus" href="{{$contact->google_plus}}"><i class="fa fa-google-plus"></i></a></li>
         </ul>
       </div>
       <!-- ################################################################################################ -->
@@ -28,7 +26,7 @@
     <header id="header" class="clear">
       <!-- ################################################################################################ -->
       <div id="logo" class="fl_left">
-        <h1><a href="index.html">Inventory</a></h1>
+        <h1><a href="{{route('frontent.home')}}"><img src="{{!empty($logo->image)?url('/scripts/public/upload/logo_image/'.$logo->image):url('/upload/no_image.jpg/')}}" style="width: 100px; height:100px;" alt="IMG-LOGO"></a></h1>
       </div>
       <nav id="mainav" class="fl_right">
         <ul class="clear">
