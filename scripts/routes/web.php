@@ -55,7 +55,7 @@ Route::group(['middleware'=>['auth','admin']],function (){
         Route::get('/delete/{id}',[\App\Http\Controllers\Admin\SliderController::class,'destroy'])->name('sliders.delete');
 
         Route::get('/activate/{id}',[App\Http\Controllers\Admin\SliderController::class,'activate'])->name('sliders.activate');
-    Route::get('/unactivate/{id}',[App\Http\Controllers\Admin\SliderController::class,'unactivate'])->name('sliders.unactivate');
+        Route::get('/unactivate/{id}',[App\Http\Controllers\Admin\SliderController::class,'unactivate'])->name('sliders.unactivate');
     });
 
     Route::prefix('contacts')->group(function(){
@@ -74,7 +74,6 @@ Route::group(['middleware'=>['auth','admin']],function (){
         Route::post('/update/{id}',[\App\Http\Controllers\Admin\AboutController::class,'update'])->name('abouts.update');
         Route::get('/delete/{id}',[\App\Http\Controllers\Admin\AboutController::class,'destroy'])->name('abouts.delete');
     });
-
 
     Route::prefix('suppliers')->group(function(){
         Route::get('/view',[\App\Http\Controllers\Admin\SupplierController::class,'index'])->name('suppliers.view');
@@ -103,4 +102,12 @@ Route::group(['middleware'=>['auth','admin']],function (){
         Route::put('/update/{id}',[\App\Http\Controllers\Admin\CategoryController::class,'update'])->name('categories.update');
         Route::get('/delete/{id}',[\App\Http\Controllers\Admin\CategoryController::class,'destroy'])->name('categories.delete');
     });
+
+    Route::prefix('products')->group(function(){
+        Route::get('/view',[\App\Http\Controllers\Admin\ProductController::class,'index'])->name('products.view');
+        Route::post('/create',[\App\Http\Controllers\Admin\ProductController::class,'store'])->name('products.store');
+        Route::put('/update/{id}',[\App\Http\Controllers\Admin\ProductController::class,'update'])->name('products.update');
+        Route::get('/delete/{id}',[\App\Http\Controllers\Admin\ProductController::class,'destroy'])->name('products.delete');
+    });
+
 });
