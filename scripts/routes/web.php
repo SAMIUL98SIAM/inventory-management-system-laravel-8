@@ -21,7 +21,6 @@ Auth::routes();
 Route::group(['middleware'=>['auth','admin']],function (){
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
     Route::prefix('users')->group(function(){
         Route::get('/view',[\App\Http\Controllers\Admin\UserController::class,'index'])->name('users.view');
         Route::get('/create',[\App\Http\Controllers\Admin\UserController::class,'create'])->name('users.create');
@@ -61,7 +60,6 @@ Route::group(['middleware'=>['auth','admin']],function (){
 
     Route::prefix('contacts')->group(function(){
         Route::get('/view',[\App\Http\Controllers\Admin\ContactController::class,'index'])->name('contacts.view');
-
         Route::post('/create',[\App\Http\Controllers\Admin\ContactController::class,'store'])->name('contacts.store');
         Route::get('/edit/{id}',[\App\Http\Controllers\Admin\ContactController::class,'edit'])->name('contacts.edit');
         Route::post('/update/{id}',[\App\Http\Controllers\Admin\ContactController::class,'update'])->name('contacts.update');
@@ -83,5 +81,26 @@ Route::group(['middleware'=>['auth','admin']],function (){
         Route::post('/create',[\App\Http\Controllers\Admin\SupplierController::class,'store'])->name('suppliers.store');
         Route::put('/update/{id}',[\App\Http\Controllers\Admin\SupplierController::class,'update'])->name('suppliers.update');
         Route::get('/delete/{id}',[\App\Http\Controllers\Admin\SupplierController::class,'destroy'])->name('suppliers.delete');
+    });
+
+    Route::prefix('customers')->group(function(){
+        Route::get('/view',[\App\Http\Controllers\Admin\CustomerController::class,'index'])->name('customers.view');
+        Route::post('/create',[\App\Http\Controllers\Admin\CustomerController::class,'store'])->name('customers.store');
+        Route::put('/update/{id}',[\App\Http\Controllers\Admin\CustomerController::class,'update'])->name('customers.update');
+        Route::get('/delete/{id}',[\App\Http\Controllers\Admin\CustomerController::class,'destroy'])->name('customers.delete');
+    });
+
+    Route::prefix('units')->group(function(){
+        Route::get('/view',[\App\Http\Controllers\Admin\UnitController::class,'index'])->name('units.view');
+        Route::post('/create',[\App\Http\Controllers\Admin\UnitController::class,'store'])->name('units.store');
+        Route::put('/update/{id}',[\App\Http\Controllers\Admin\UnitController::class,'update'])->name('units.update');
+        Route::get('/delete/{id}',[\App\Http\Controllers\Admin\UnitController::class,'destroy'])->name('units.delete');
+    });
+
+    Route::prefix('categories')->group(function(){
+        Route::get('/view',[\App\Http\Controllers\Admin\CategoryController::class,'index'])->name('categories.view');
+        Route::post('/create',[\App\Http\Controllers\Admin\CategoryController::class,'store'])->name('categories.store');
+        Route::put('/update/{id}',[\App\Http\Controllers\Admin\CategoryController::class,'update'])->name('categories.update');
+        Route::get('/delete/{id}',[\App\Http\Controllers\Admin\CategoryController::class,'destroy'])->name('categories.delete');
     });
 });

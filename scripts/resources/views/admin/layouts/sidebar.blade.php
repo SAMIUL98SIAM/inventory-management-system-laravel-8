@@ -168,6 +168,63 @@
                   </li>
                 </ul>
             </li>
+
+            <li class="nav-item has-treeview {{$prefix=='/customers'?'menu-open':''}}">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>
+                    About Customer
+                    <i class="fas fa-angle-left right"></i>
+                    {{-- <span class="badge badge-info right">6</span> --}}
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('customers.view')}}" class="nav-link {{$route=='customers.view'?'active':''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>View Customer</p>
+                    </a>
+                  </li>
+                </ul>
+            </li>
+
+            <li class="nav-item has-treeview {{$prefix=='/units'?'menu-open':''}}">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>
+                    About Unit
+                    <i class="fas fa-angle-left right"></i>
+                    {{-- <span class="badge badge-info right">6</span> --}}
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('units.view')}}" class="nav-link {{$route=='units.view'?'active':''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>View Unit</p>
+                    </a>
+                  </li>
+                </ul>
+            </li>
+
+            <li class="nav-item has-treeview {{$prefix=='/categories'?'menu-open':''}}">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>
+                    About Category
+                    <i class="fas fa-angle-left right"></i>
+                    {{-- <span class="badge badge-info right">6</span> --}}
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('categories.view')}}" class="nav-link {{$route=='categories.view'?'active':''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>View Category</p>
+                    </a>
+                  </li>
+                </ul>
+            </li>
         </ul>
     </nav>
 </aside>

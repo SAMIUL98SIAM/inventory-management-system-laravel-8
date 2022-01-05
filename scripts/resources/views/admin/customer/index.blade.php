@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Manage Supplier</h1>
+                    <h1 class="m-0">Manage Customer</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                    <li class="breadcrumb-item active">Supplier</li>
+                    <li class="breadcrumb-item active">Customer</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -30,23 +30,23 @@
             <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-header">
-                    <h3>Supplier List</h3>
-                    <button class="btn btn-success float-right btn-sm" data-toggle="modal" data-target="#basicModal"><i class="fa fa-plus-circle">Add Supplier</i></button>
+                    <h3>customer List</h3>
+                    <button class="btn btn-success float-right btn-sm" data-toggle="modal" data-target="#basicModal"><i class="fa fa-plus-circle">Add Customer</i></button>
                     <!--Create Modal--->
                     <div class="modal fade" id="basicModal">
                         <div style="color: #000" class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Create Supplier</h5>
+                                    <h5 class="modal-title">Create Customer</h5>
                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="post" action="{{ route('suppliers.store') }}" id="myForm">
+                                    <form method="post" action="{{ route('customers.store') }}" id="myForm">
                                         @csrf
                                         <div class="form-group">
-                                            <label class="name">Supplier Name</label>
-                                            <input type="text" name="name" id="name" value="{{old('name')}}" class="form-control" placeholder="supplier Name">
+                                            <label class="name">Customer Name</label>
+                                            <input type="text" name="name" id="name" value="{{old('name')}}" class="form-control" placeholder="customer Name">
                                         </div>
                                         <div class="form-group">
                                             <label class="mobile_no">Mobile No</label>
@@ -86,15 +86,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($allData as $key=>$supplier)
+                            @foreach ($allData as $key=>$customer)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td>{{$supplier->name}}</td>
-                                <td>{{$supplier->mobile_no}}</td>
-                                <td>{{$supplier->email}}</td>
-                                <td>{{$supplier->address}}</td>
-                                <td>{{$supplier->created_by}}</td>
-                                <td>{{$supplier->updated_by}}</td>
+                                <td>{{$customer->name}}</td>
+                                <td>{{$customer->mobile_no}}</td>
+                                <td>{{$customer->email}}</td>
+                                <td>{{$customer->address}}</td>
+                                <td>{{$customer->created_by}}</td>
+                                <td>{{$customer->updated_by}}</td>
                                 <td>
                                     <button title="Edit" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#editModal{{$key}}"><i class="fa fa-edit"></i></button>
                                     {{--Edit Modal--}}
@@ -102,29 +102,29 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Edit Supplier</h5>
+                                                    <h5 class="modal-title">Edit Customer</h5>
                                                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="post" action="{{ route('suppliers.update',$supplier->id) }}">
+                                                    <form method="post" action="{{ route('customers.update',$customer->id) }}">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="form-group">
-                                                            <label class="package_name">Name</label>
-                                                            <input type="text" name="name" class="form-control" required="" value="{{ $supplier->name }}">
+                                                            <label class="package_name">Customer Name</label>
+                                                            <input type="text" name="name" class="form-control" required="" value="{{ $customer->name }}">
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="mobile_no">Mobile No</label>
-                                                            <input type="mobile_no" name="mobile_no" id="mobile_no" value="{{$supplier->mobile_no}}" class="form-control" placeholder="Mobile No">
+                                                            <input type="mobile_no" name="mobile_no" id="mobile_no" value="{{$customer->mobile_no}}" class="form-control" placeholder="Mobile No">
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="amount">Email</label>
-                                                            <input type="email" name="email" class="form-control" required="" value="{{ $supplier->email }}">
+                                                            <input type="email" name="email" class="form-control" required="" value="{{ $customer->email }}">
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="address">Address</label>
-                                                            <input type="address" name="address" class="form-control" required="" value="{{ $supplier->address }}">
+                                                            <input type="address" name="address" class="form-control" required="" value="{{ $customer->address }}">
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -137,7 +137,7 @@
                                     </div>
                                     {{--Edit Modal /--}}
 
-                                    <a title="Delete" href="{{route('suppliers.delete',$supplier->id)}}" class="btn btn-sm btn-danger" id="delete"><i class="fas fa-trash"></i></a>
+                                    <a title="Delete" href="{{route('customers.delete',$customer->id)}}" class="btn btn-sm btn-danger" id="delete"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                             @endforeach
