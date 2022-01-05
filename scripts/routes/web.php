@@ -110,4 +110,18 @@ Route::group(['middleware'=>['auth','admin']],function (){
         Route::get('/delete/{id}',[\App\Http\Controllers\Admin\ProductController::class,'destroy'])->name('products.delete');
     });
 
+    Route::prefix('purchases')->group(function(){
+        Route::get('/view',[\App\Http\Controllers\Admin\PurchaseController::class,'index'])->name('purchases.view');
+        Route::get('/create',[\App\Http\Controllers\Admin\PurchaseController::class,'create'])->name('purchases.create');
+        Route::post('/create',[\App\Http\Controllers\Admin\PurchaseController::class,'store'])->name('purchases.store');
+        Route::get('/edit/{id}',[\App\Http\Controllers\Admin\PurchaseController::class,'edit'])->name('purchases.edit');
+        Route::post('/update/{id}',[\App\Http\Controllers\Admin\PurchaseController::class,'update'])->name('purchases.update');
+        Route::get('/delete/{id}',[\App\Http\Controllers\Admin\PurchaseController::class,'destroy'])->name('purchases.delete');
+
+    });
+
+    Route::get('/get-category',[\App\Http\Controllers\Admin\DefaultController::class,'getCategory'])->name('get-category');
+
+    Route::get('/get-product',[\App\Http\Controllers\Admin\DefaultController::class,'getProduct'])->name('get-product');
+
 });
