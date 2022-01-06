@@ -95,6 +95,7 @@
                                 <th>Unit</th>
                                 <th>Category</th>
                                 <th>Name</th>
+                                <th>Soldout</th>
                                 <th>Created By</th>
                                 <th>Updated By</th>
                                 <th>Action</th>
@@ -108,6 +109,7 @@
                                 <td>{{$product->unit->name}}</td>
                                 <td>{{$product->category->name}}</td>
                                 <td>{{$product->name}}</td>
+                                <td>{{$product->quantity}}</td>
                                 <td>{{$product->created_by}}</td>
                                 <td>{{$product->updated_by}}</td>
                                 <td>
@@ -167,7 +169,13 @@
                                     </div>
                                     {{--Edit Modal /--}}
 
+                                    @php
+                                    $count_product = App\Models\Purchase::where('product_id',$product->id)->count();
+                                    @endphp
+
+                                    @if($count_product<1)
                                     <a title="Delete" href="{{route('products.delete',$product->id)}}" class="btn btn-sm btn-danger" id="delete"><i class="fas fa-trash"></i></a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

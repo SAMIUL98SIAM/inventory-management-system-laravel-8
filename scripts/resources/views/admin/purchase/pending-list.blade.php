@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Manage Purchase</h1>
+                    <h1 class="m-0">Manage Pending Purchase</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                    <li class="breadcrumb-item active">Purchase</li>
+                    <li class="breadcrumb-item active">Pending Purchase</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -30,9 +30,7 @@
             <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-header">
-                    <h3>Purchase List</h3>
-                    <a class="btn btn-success float-right btn-sm" href="{{route('purchases.create')}}"><i class="fa fa-plus-circle"> Create Purchase</i></a>
-
+                    <h3>Pending Purchase List</h3>
                 </div><!-- /.card-header -->
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-hover table-responsive">
@@ -78,7 +76,7 @@
                                 <td>
                                     {{-- <a title="Edit" href="{{route('purchases.edit',$purchase->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a> --}}
                                     @if($purchase->status==0)
-                                    <a title="Delete" href="{{route('purchases.delete',$purchase->id)}}" class="btn btn-sm btn-danger" id="delete"><i class="fas fa-trash"></i></a>
+                                    <a title="Approve" href="{{route('purchases.approve',$purchase->id)}}" class="btn btn-sm btn-success" id="approveBtn"><i class="fas fa-check-circle"></i></a>
                                     @endif
                                 </td>
                             </tr>

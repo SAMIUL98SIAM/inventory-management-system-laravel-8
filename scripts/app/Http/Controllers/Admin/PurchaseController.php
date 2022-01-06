@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
@@ -123,5 +124,24 @@ class PurchaseController extends Controller
         $purchase = Purchase::find($id);
         $purchase->delete();
         return redirect()->route('purchases.view')->with('error','Purchase has been deleted');
+    }
+
+    public function pending(Request $request)
+    {
+        $data['purchases']= Purchase::orderBy('date','desc')->orderBy('id','desc')->where('status',0)->get();
+        return view('admin.purchase.pending-list',$data);
+    }
+
+    public function approve(Request $request,$id)
+    {
+        $purchase = Purchase::find($id);
+        $product = Product::where('id',$purchase->product_id)->first();
+        $purchase_qty = ((float)($purchase->buying_qty))+((float)($product->quantity));
+        $product->quantity = $purchase_qty;
+        if($product->save())
+        {
+            DB::table('purchases')->where('id',$id)->update(['status'=>1]);
+        }
+        return redirect()->route('purchases.pending')->with('success','Data approved successfully');
     }
 }

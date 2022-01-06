@@ -118,10 +118,12 @@ Route::group(['middleware'=>['auth','admin']],function (){
         Route::post('/update/{id}',[\App\Http\Controllers\Admin\PurchaseController::class,'update'])->name('purchases.update');
         Route::get('/delete/{id}',[\App\Http\Controllers\Admin\PurchaseController::class,'destroy'])->name('purchases.delete');
 
+        Route::get('/pending',[\App\Http\Controllers\Admin\PurchaseController::class,'pending'])->name('purchases.pending');
+        Route::get('/approve/{id}',[\App\Http\Controllers\Admin\PurchaseController::class,'approve'])->name('purchases.approve');
+
     });
 
     Route::get('/get-category',[\App\Http\Controllers\Admin\DefaultController::class,'getCategory'])->name('get-category');
-
     Route::get('/get-product',[\App\Http\Controllers\Admin\DefaultController::class,'getProduct'])->name('get-product');
 
 });

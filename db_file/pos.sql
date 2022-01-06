@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2022 at 08:58 PM
+-- Generation Time: Jan 06, 2022 at 05:31 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.26
 
@@ -46,6 +46,30 @@ INSERT INTO `abouts` (`id`, `description`, `created_by`, `updated_by`, `created_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(1, 'Cement', 1, 1, 1, '2022-01-05 07:23:10', '2022-01-05 13:31:50'),
+(2, 'Electronics', 1, 1, 1, '2022-01-05 07:23:17', '2022-01-05 13:31:34');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `contacts`
 --
 
@@ -71,6 +95,33 @@ CREATE TABLE `contacts` (
 
 INSERT INTO `contacts` (`id`, `address`, `mobile_no`, `email`, `facebook`, `twitter`, `youtube`, `linkedin`, `google_plus`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (1, 'Uttara, Dhaka', '01992569682', 'samiulsiam59@gmail.com', 'https://www.facebook.com/samiulhaque.siam.7/', 'https://twitter.com/', 'https://www.youtube.com/channel/UC4TiTw-i_DmEFIuwQ5t7I-w', 'https://www.linkedin.com/in/md-samiul-hoque-599b5617b/', 'https://mail.google.com/mail/u/0/#inbox', 1, NULL, '2022-01-04 11:56:24', '2022-01-04 11:56:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mobile_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `name`, `mobile_no`, `email`, `address`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(1, 'Humayun', '01312569682', 'Usman@gmail.com', 'Monipura', 1, 1, NULL, '2022-01-05 06:31:32', '2022-01-05 06:31:32'),
+(2, 'imrul', '01992569681', 'kayesh@gmail.com', 'barishal', 1, 1, 1, '2022-01-05 06:31:52', '2022-01-05 06:31:59');
 
 -- --------------------------------------------------------
 
@@ -136,7 +187,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2021_12_20_210858_create_sliders_table', 1),
 (8, '2021_12_20_221250_create_contacts_table', 1),
 (9, '2021_12_21_124230_create_abouts_table', 1),
-(10, '2022_01_04_192616_create_suppliers_table', 2);
+(10, '2022_01_04_192616_create_suppliers_table', 2),
+(11, '2022_01_05_121419_create_customers_table', 3),
+(12, '2022_01_05_123915_create_units_table', 4),
+(13, '2022_01_05_125252_create_categories_table', 5),
+(14, '2022_01_05_133407_create_products_table', 6),
+(15, '2022_01_05_172211_create_purchases_table', 7);
 
 -- --------------------------------------------------------
 
@@ -167,6 +223,71 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `supplier_id` int(11) NOT NULL,
+  `unit_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quantity` double NOT NULL DEFAULT 0,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `supplier_id`, `unit_id`, `category_id`, `name`, `quantity`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 2, 'Walton Mobile 1042', 0, 1, 1, 1, '2022-01-05 08:18:17', '2022-01-05 13:33:20'),
+(3, 1, 2, 2, 'Walton Mobile 360', 0, 1, 1, 1, '2022-01-05 10:41:02', '2022-01-05 13:34:25'),
+(4, 1, 2, 2, 'Walton Mobile 500', 0, 1, 1, NULL, '2022-01-05 13:34:46', '2022-01-05 13:34:46'),
+(5, 2, 2, 1, 'boshundhara Cement', 0, 1, 1, NULL, '2022-01-05 13:35:15', '2022-01-05 13:35:15'),
+(6, 2, 2, 1, 'Holcim Cement', 100, 1, 1, NULL, '2022-01-05 13:35:48', '2022-01-06 10:23:44');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchases`
+--
+
+CREATE TABLE `purchases` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `supplier_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `purchase_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` date NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `buying_qty` double NOT NULL,
+  `unit_price` double NOT NULL,
+  `buying_price` double NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=Pending , 1=Approve',
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `purchases`
+--
+
+INSERT INTO `purchases` (`id`, `supplier_id`, `category_id`, `product_id`, `purchase_no`, `date`, `description`, `buying_qty`, `unit_price`, `buying_price`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 1, 'kkk-111', '2022-01-01', 'dummy', 14, 1500, 21000, 0, 1, NULL, '2022-01-05 16:20:18', '2022-01-05 16:20:18'),
+(3, 2, 1, 6, 'kkk-111', '2022-01-01', 'dummy 2', 60, 7000, 420000, 1, 1, NULL, '2022-01-05 16:20:18', '2022-01-05 16:20:18'),
+(4, 2, 1, 5, 'kkk-111', '2022-01-07', 'dummy 3', 100, 500, 50000, 0, 1, NULL, '2022-01-06 06:26:46', '2022-01-06 06:26:46'),
+(5, 2, 1, 6, 'kkk-111', '2022-01-07', 'dummy 4', 40, 600, 24000, 1, 1, NULL, '2022-01-06 06:26:46', '2022-01-06 06:26:46');
 
 -- --------------------------------------------------------
 
@@ -218,7 +339,32 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`id`, `name`, `mobile_no`, `email`, `address`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 'Walton Company', '01312569681', 'walton@gmail.com', 'Badda', 1, 1, 1, '2022-01-04 13:52:57', '2022-01-04 13:53:21');
+(1, 'Walton Company', '01312569681', 'walton@gmail.com', 'Badda', 1, 1, 1, '2022-01-04 13:52:57', '2022-01-04 13:53:21'),
+(2, 'KSRM Road', '01772569682', 'ksrm@gmail.com', 'Kuril', 1, 1, 1, '2022-01-05 10:37:03', '2022-01-05 13:30:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `units`
+--
+
+CREATE TABLE `units` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `units`
+--
+
+INSERT INTO `units` (`id`, `name`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(1, 'KG', 1, 1, 1, '2022-01-05 06:50:22', '2022-01-05 06:51:40'),
+(2, 'PCS', 1, 1, 1, '2022-01-05 06:51:47', '2022-01-05 13:31:09');
 
 -- --------------------------------------------------------
 
@@ -250,7 +396,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `usertype`, `name`, `email`, `email_verified_at`, `password`, `mobile`, `address`, `gender`, `image`, `code`, `role`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'Md Samiul', 'samiulsiam59@gmail.com', NULL, '$2y$10$YzwpdXM49h77Av6z7lG8FO6Rta.P6KlrrOxJq0fDh9qAb7DjsAHnK', '01992569682', 'Uttara, Dhaka', 'Male', '202201041748e5ed5f44-43aa-45f0-9cbe-35ebf0c512cf.jfif', NULL, 'Admin', 1, '6InmwJ4th357wgzOi93toqcpeilmrTruAOW64F2xNd8tX15EuokG0ee1VCMs', '2022-01-04 11:30:21', '2022-01-04 11:49:30'),
+(1, 'admin', 'Md Samiul', 'samiulsiam59@gmail.com', NULL, '$2y$10$YzwpdXM49h77Av6z7lG8FO6Rta.P6KlrrOxJq0fDh9qAb7DjsAHnK', '01992569682', 'Uttara, Dhaka', 'Male', '202201041748e5ed5f44-43aa-45f0-9cbe-35ebf0c512cf.jfif', NULL, 'Admin', 1, 'qJ469oiongIyl0fZLCengxw8ZzogvoL9uTlvntY77e7nxh0bZCcbyOymhwFH', '2022-01-04 11:30:21', '2022-01-04 11:49:30'),
 (2, 'admin', 'Sharmin Mumu', 'mumu12@gmail.com', NULL, '$2y$10$haraVDR2KYoLjO8daboaleVPZYAYJLeI6QGua41do/E3jd1pdZ1g6', NULL, NULL, NULL, NULL, '6781', 'Operator', 1, NULL, '2022-01-04 11:46:48', '2022-01-04 11:46:48');
 
 --
@@ -264,9 +410,21 @@ ALTER TABLE `abouts`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `contacts`
 --
 ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -303,6 +461,18 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchases`
+--
+ALTER TABLE `purchases`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sliders`
 --
 ALTER TABLE `sliders`
@@ -312,6 +482,12 @@ ALTER TABLE `sliders`
 -- Indexes for table `suppliers`
 --
 ALTER TABLE `suppliers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `units`
+--
+ALTER TABLE `units`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -332,10 +508,22 @@ ALTER TABLE `abouts`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -353,13 +541,25 @@ ALTER TABLE `logos`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `purchases`
+--
+ALTER TABLE `purchases`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `sliders`
@@ -371,7 +571,13 @@ ALTER TABLE `sliders`
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `units`
+--
+ALTER TABLE `units`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`

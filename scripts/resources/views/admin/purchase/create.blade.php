@@ -40,15 +40,15 @@
                             @csrf
                             <div class="col-4">
                                 <label class="data">Date</label>
-                                <input type="text" name="date" id="date" class="form-control singledatepicker" placeholder="YYYY-MM-DD" readonly>
+                                <input type="text" name="date" id="date" class="form-control form-control-sm singledatepicker" placeholder="YYYY-MM-DD" readonly>
                             </div>
                             <div class="col-4">
                                 <label class="">Purchase No</label>
-                                <input type="text" name="purchase_no" id="purchase_no" class="form-control" placeholder="Pruchase No" >
+                                <input type="text" name="purchase_no" id="purchase_no" class="form-control form-control-sm" placeholder="Pruchase No" >
                             </div>
                             <div class="col-4">
                                 <label class="supplier_id">Select Supplier</label>
-                                <select name="supplier_id" id="supplier_id" class="form-control form-control-sm">
+                                <select name="supplier_id" id="supplier_id" class="form-control select2">
                                     <option value="">Select Supplier</option>
                                     @foreach($suppliers as $supplier)
                                     <option value="{{$supplier->id}}">{{$supplier->name}}</option>
@@ -57,14 +57,14 @@
                             </div>
                             <div class="col-4">
                                 <label class="category_id">Select Category</label>
-                                <select name="category_id" id="category_id" class="form-control form-control-sm">
+                                <select name="category_id" id="category_id" class="form-control select2">
                                     <option value="">Select category</option>
 
                                 </select>
                             </div>
                             <div class="col-4">
                                 <label class="product_id">Select Product</label>
-                                <select name="product_id" id="product_id" class="form-control form-control-sm">
+                                <select name="product_id" id="product_id" class="form-control select2">
                                     <option value="">Select Product</option>
 
                                 </select>

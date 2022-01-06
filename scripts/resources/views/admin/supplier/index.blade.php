@@ -70,13 +70,14 @@
                         </div>
                     </div>
                     <!--Create Modal/--->
-                </div><!-- /.card-header -->
+                </div>
+                <!-- /.card-header -->
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>Serial</th>
-                                <th>Name</th>
+                                <th width="5%">Name</th>
                                 <th>Mobile No</th>
                                 <th>Email</th>
                                 <th>Address</th>
@@ -89,7 +90,7 @@
                             @foreach ($allData as $key=>$supplier)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td>{{$supplier->name}}</td>
+                                <td width="5%">{{$supplier->name}}</td>
                                 <td>{{$supplier->mobile_no}}</td>
                                 <td>{{$supplier->email}}</td>
                                 <td>{{$supplier->address}}</td>
@@ -137,7 +138,12 @@
                                     </div>
                                     {{--Edit Modal /--}}
 
+                                    @php
+                                        $count_supplier = App\Models\Product::where('supplier_id',$supplier->id)->count();
+                                    @endphp
+                                    @if($count_supplier<1)
                                     <a title="Delete" href="{{route('suppliers.delete',$supplier->id)}}" class="btn btn-sm btn-danger" id="delete"><i class="fas fa-trash"></i></a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

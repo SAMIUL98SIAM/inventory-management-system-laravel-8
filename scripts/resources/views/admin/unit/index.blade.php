@@ -106,8 +106,13 @@
                                         </div>
                                     </div>
                                     {{--Edit Modal /--}}
+                                    @php
+                                        $count_unit = App\Models\Product::where('unit_id',$unit->id)->count();
+                                    @endphp
 
+                                    @if($count_unit<1)
                                     <a title="Delete" href="{{route('units.delete',$unit->id)}}" class="btn btn-sm btn-danger" id="delete"><i class="fas fa-trash"></i></a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

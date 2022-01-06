@@ -197,6 +197,36 @@
     });
 </script>
 
+
+<script type="text/javascript">
+    $(function(){
+        $(document).on('click','#approveBtn',function(e){
+            e.preventDefault();
+            var link = $(this).attr("href");
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Approve this data?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, approve it!'
+            }).then((result) => {
+                if (result.value)
+                {
+                    window.location.href= link;
+                    Swal.fire(
+                    'approve!',
+                    'Your purchase has been approve.',
+                    'success'
+                    )
+                }
+            })
+        });
+    });
+</script>
+
+
 {{-- Approve --}}
 <script type="text/javascript">
     $(function(){
@@ -266,6 +296,13 @@
             $(this).trigger('change');
         });
     });
+</script>
+
+
+<script type="text/javascript">
+$(function(){
+    $('.select2').select2();
+});
 </script>
 
 @yield('scripts')

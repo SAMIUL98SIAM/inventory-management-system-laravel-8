@@ -262,6 +262,13 @@
                       <p>View Purchase</p>
                     </a>
                   </li>
+
+                  <li class="nav-item">
+                    <a href="{{route('purchases.pending')}}" class="nav-link {{$route=='purchases.pending'?'active':''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Approval Purchase</p>
+                    </a>
+                  </li>
                 </ul>
             </li>
         </ul>

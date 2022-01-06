@@ -106,8 +106,13 @@
                                         </div>
                                     </div>
                                     {{--Edit Modal /--}}
+                                    @php
+                                    $count_category = App\Models\Product::where('category_id',$category->id)->count();
+                                    @endphp
 
+                                    @if($count_category<1)
                                     <a title="Delete" href="{{route('categories.delete',$category->id)}}" class="btn btn-sm btn-danger" id="delete"><i class="fas fa-trash"></i></a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
