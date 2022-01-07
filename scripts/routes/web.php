@@ -120,10 +120,25 @@ Route::group(['middleware'=>['auth','admin']],function (){
 
         Route::get('/pending',[\App\Http\Controllers\Admin\PurchaseController::class,'pending'])->name('purchases.pending');
         Route::get('/approve/{id}',[\App\Http\Controllers\Admin\PurchaseController::class,'approve'])->name('purchases.approve');
-
     });
+
+
+    Route::prefix('invoices')->group(function(){
+        Route::get('/view',[\App\Http\Controllers\Admin\InvoiceController::class,'index'])->name('invoices.view');
+        Route::get('/create',[\App\Http\Controllers\Admin\InvoiceController::class,'create'])->name('invoices.create');
+        Route::post('/create',[\App\Http\Controllers\Admin\InvoiceController::class,'store'])->name('invoices.store');
+        Route::get('/edit/{id}',[\App\Http\Controllers\Admin\InvoiceController::class,'edit'])->name('invoices.edit');
+        Route::post('/update/{id}',[\App\Http\Controllers\Admin\InvoiceController::class,'update'])->name('invoices.update');
+        Route::get('/delete/{id}',[\App\Http\Controllers\Admin\InvoiceController::class,'destroy'])->name('invoices.delete');
+
+        Route::get('/pending',[\App\Http\Controllers\Admin\InvoiceController::class,'pending'])->name('invoices.pending');
+        Route::get('/approve/{id}',[\App\Http\Controllers\Admin\InvoiceController::class,'approve'])->name('invoices.approve');
+    });
+
 
     Route::get('/get-category',[\App\Http\Controllers\Admin\DefaultController::class,'getCategory'])->name('get-category');
     Route::get('/get-product',[\App\Http\Controllers\Admin\DefaultController::class,'getProduct'])->name('get-product');
+    Route::get('/check-product-stock',[\App\Http\Controllers\Admin\DefaultController::class,'getProductStock'])->name('check-product-stock');
+
 
 });

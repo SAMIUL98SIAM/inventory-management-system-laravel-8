@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2022 at 05:31 PM
+-- Generation Time: Jan 06, 2022 at 08:44 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.26
 
@@ -65,7 +65,8 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `name`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (1, 'Cement', 1, 1, 1, '2022-01-05 07:23:10', '2022-01-05 13:31:50'),
-(2, 'Electronics', 1, 1, 1, '2022-01-05 07:23:17', '2022-01-05 13:31:34');
+(2, 'Electronics', 1, 1, 1, '2022-01-05 07:23:17', '2022-01-05 13:31:34'),
+(3, 'Cosmatics', 1, 1, NULL, '2022-01-06 11:01:39', '2022-01-06 11:01:39');
 
 -- --------------------------------------------------------
 
@@ -142,6 +143,44 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `invoices`
+--
+
+CREATE TABLE `invoices` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `invoice_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` date NOT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=Pending,1=Approve',
+  `created_by` int(11) DEFAULT NULL,
+  `approved_by` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice_details`
+--
+
+CREATE TABLE `invoice_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `date` date DEFAULT NULL,
+  `invoice_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `selling_qty` double NOT NULL,
+  `unit_price` double NOT NULL,
+  `selling_price` double NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `logos`
 --
 
@@ -192,7 +231,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (12, '2022_01_05_123915_create_units_table', 4),
 (13, '2022_01_05_125252_create_categories_table', 5),
 (14, '2022_01_05_133407_create_products_table', 6),
-(15, '2022_01_05_172211_create_purchases_table', 7);
+(15, '2022_01_05_172211_create_purchases_table', 7),
+(16, '2022_01_06_190130_create_invoices_table', 8),
+(17, '2022_01_06_190506_create_invoice_details_table', 8),
+(18, '2022_01_06_190526_create_payments_table', 8),
+(19, '2022_01_06_190537_create_payment_details_table', 8);
 
 -- --------------------------------------------------------
 
@@ -204,6 +247,41 @@ CREATE TABLE `password_resets` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `invoice_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `paid_status` varchar(51) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `paid_amount` double DEFAULT NULL,
+  `due_amount` double DEFAULT NULL,
+  `total_amount` double DEFAULT NULL,
+  `discount_amount` double DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_details`
+--
+
+CREATE TABLE `payment_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `invoice_id` int(11) NOT NULL,
+  `cuurent_paid_amount` double DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -249,11 +327,12 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `supplier_id`, `unit_id`, `category_id`, `name`, `quantity`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 2, 'Walton Mobile 1042', 0, 1, 1, 1, '2022-01-05 08:18:17', '2022-01-05 13:33:20'),
+(1, 1, 2, 2, 'Walton Mobile 1042', 24, 1, 1, 1, '2022-01-05 08:18:17', '2022-01-06 11:07:27'),
 (3, 1, 2, 2, 'Walton Mobile 360', 0, 1, 1, 1, '2022-01-05 10:41:02', '2022-01-05 13:34:25'),
 (4, 1, 2, 2, 'Walton Mobile 500', 0, 1, 1, NULL, '2022-01-05 13:34:46', '2022-01-05 13:34:46'),
-(5, 2, 2, 1, 'boshundhara Cement', 0, 1, 1, NULL, '2022-01-05 13:35:15', '2022-01-05 13:35:15'),
-(6, 2, 2, 1, 'Holcim Cement', 100, 1, 1, NULL, '2022-01-05 13:35:48', '2022-01-06 10:23:44');
+(5, 2, 2, 1, 'boshundhara Cement', 100, 1, 1, NULL, '2022-01-05 13:35:15', '2022-01-06 10:32:56'),
+(6, 2, 2, 1, 'Holcim Cement', 160, 1, 1, NULL, '2022-01-05 13:35:48', '2022-01-06 10:32:18'),
+(7, 3, 2, 3, 'Keya Soap', 0, 1, 1, NULL, '2022-01-06 12:30:12', '2022-01-06 12:30:12');
 
 -- --------------------------------------------------------
 
@@ -284,10 +363,12 @@ CREATE TABLE `purchases` (
 --
 
 INSERT INTO `purchases` (`id`, `supplier_id`, `category_id`, `product_id`, `purchase_no`, `date`, `description`, `buying_qty`, `unit_price`, `buying_price`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 1, 'kkk-111', '2022-01-01', 'dummy', 14, 1500, 21000, 0, 1, NULL, '2022-01-05 16:20:18', '2022-01-05 16:20:18'),
+(1, 1, 2, 1, 'kkk-111', '2022-01-01', 'dummy', 14, 1500, 21000, 1, 1, NULL, '2022-01-05 16:20:18', '2022-01-05 16:20:18'),
 (3, 2, 1, 6, 'kkk-111', '2022-01-01', 'dummy 2', 60, 7000, 420000, 1, 1, NULL, '2022-01-05 16:20:18', '2022-01-05 16:20:18'),
-(4, 2, 1, 5, 'kkk-111', '2022-01-07', 'dummy 3', 100, 500, 50000, 0, 1, NULL, '2022-01-06 06:26:46', '2022-01-06 06:26:46'),
-(5, 2, 1, 6, 'kkk-111', '2022-01-07', 'dummy 4', 40, 600, 24000, 1, 1, NULL, '2022-01-06 06:26:46', '2022-01-06 06:26:46');
+(4, 2, 1, 5, 'kkk-111', '2022-01-07', 'dummy 3', 100, 500, 50000, 1, 1, NULL, '2022-01-06 06:26:46', '2022-01-06 06:26:46'),
+(5, 2, 1, 6, 'kkk-111', '2022-01-07', 'dummy 4', 40, 600, 24000, 1, 1, NULL, '2022-01-06 06:26:46', '2022-01-06 06:26:46'),
+(6, 1, 2, 1, 'uuu-312', '2022-01-08', NULL, 10, 12000, 120000, 1, 1, NULL, '2022-01-06 11:06:49', '2022-01-06 11:06:49'),
+(7, 3, 3, 7, 'UU-54', '2022-01-08', NULL, 30, 30, 900, 0, 1, NULL, '2022-01-06 12:30:53', '2022-01-06 12:30:53');
 
 -- --------------------------------------------------------
 
@@ -340,7 +421,8 @@ CREATE TABLE `suppliers` (
 
 INSERT INTO `suppliers` (`id`, `name`, `mobile_no`, `email`, `address`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (1, 'Walton Company', '01312569681', 'walton@gmail.com', 'Badda', 1, 1, 1, '2022-01-04 13:52:57', '2022-01-04 13:53:21'),
-(2, 'KSRM Road', '01772569682', 'ksrm@gmail.com', 'Kuril', 1, 1, 1, '2022-01-05 10:37:03', '2022-01-05 13:30:50');
+(2, 'KSRM Road', '01772569682', 'ksrm@gmail.com', 'Kuril', 1, 1, 1, '2022-01-05 10:37:03', '2022-01-05 13:30:50'),
+(3, 'Jinnat Shopping mall', '01312569682', 'asad@nanoit.biz', 'notunbazar, Gulshan - Dhala', 1, 1, 1, '2022-01-06 10:45:21', '2022-01-06 10:45:31');
 
 -- --------------------------------------------------------
 
@@ -396,7 +478,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `usertype`, `name`, `email`, `email_verified_at`, `password`, `mobile`, `address`, `gender`, `image`, `code`, `role`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'Md Samiul', 'samiulsiam59@gmail.com', NULL, '$2y$10$YzwpdXM49h77Av6z7lG8FO6Rta.P6KlrrOxJq0fDh9qAb7DjsAHnK', '01992569682', 'Uttara, Dhaka', 'Male', '202201041748e5ed5f44-43aa-45f0-9cbe-35ebf0c512cf.jfif', NULL, 'Admin', 1, 'qJ469oiongIyl0fZLCengxw8ZzogvoL9uTlvntY77e7nxh0bZCcbyOymhwFH', '2022-01-04 11:30:21', '2022-01-04 11:49:30'),
+(1, 'admin', 'Md Samiul', 'samiulsiam59@gmail.com', NULL, '$2y$10$YzwpdXM49h77Av6z7lG8FO6Rta.P6KlrrOxJq0fDh9qAb7DjsAHnK', '01992569682', 'Uttara, Dhaka', 'Male', '202201041748e5ed5f44-43aa-45f0-9cbe-35ebf0c512cf.jfif', NULL, 'Admin', 1, '9zvAWQVFCVPl0GpfXO8GLWmzwv31n9OeCZ5SFvg5QuLxJ3YHRzItiucWN2S1', '2022-01-04 11:30:21', '2022-01-04 11:49:30'),
 (2, 'admin', 'Sharmin Mumu', 'mumu12@gmail.com', NULL, '$2y$10$haraVDR2KYoLjO8daboaleVPZYAYJLeI6QGua41do/E3jd1pdZ1g6', NULL, NULL, NULL, NULL, '6781', 'Operator', 1, NULL, '2022-01-04 11:46:48', '2022-01-04 11:46:48');
 
 --
@@ -435,6 +517,18 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `invoice_details`
+--
+ALTER TABLE `invoice_details`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `logos`
 --
 ALTER TABLE `logos`
@@ -451,6 +545,18 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payment_details`
+--
+ALTER TABLE `payment_details`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `personal_access_tokens`
@@ -511,7 +617,7 @@ ALTER TABLE `abouts`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `contacts`
@@ -532,6 +638,18 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `invoices`
+--
+ALTER TABLE `invoices`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `invoice_details`
+--
+ALTER TABLE `invoice_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `logos`
 --
 ALTER TABLE `logos`
@@ -541,7 +659,19 @@ ALTER TABLE `logos`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `payment_details`
+--
+ALTER TABLE `payment_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -553,13 +683,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `sliders`
@@ -571,7 +701,7 @@ ALTER TABLE `sliders`
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `units`
