@@ -48,15 +48,17 @@
                         </thead>
                         <tbody>
                             @foreach ($invoices as $key=>$invoice)
-                            <td>{{$key+1}}</td>
-                            <td>
-                                {{$invoice->payment->customer->name}}
-                                ({{$invoice->payment->customer->mobile_no}}-{{$invoice->payment->customer->address}})
-                            </td>
-                            <td>#{{$invoice->invoice_no}}</td>
-                            <td>{{date('d-m-Y',strtotime($invoice->date))}}</td>
-                            <td>{{$invoice->description}}</td>
-                            <td>{{$invoice->payment->total_amount}}</td>
+                            <tr>
+                                <td>{{$key+1}}</td>
+                                <td>
+                                    {{$invoice->payment->customer->name}}
+                                    ({{$invoice->payment->customer->mobile_no}}-{{$invoice->payment->customer->address}})
+                                </td>
+                                <td>#{{$invoice->invoice_no}}</td>
+                                <td>{{date('d-m-Y',strtotime($invoice->date))}}</td>
+                                <td>{{$invoice->description}}</td>
+                                <td>{{$invoice->payment->total_amount}}</td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
