@@ -133,8 +133,10 @@ Route::group(['middleware'=>['auth','admin']],function (){
 
         Route::get('/pending',[\App\Http\Controllers\Admin\InvoiceController::class,'pending'])->name('invoices.pending');
         Route::get('/approve/{id}',[\App\Http\Controllers\Admin\InvoiceController::class,'approve'])->name('invoices.approve');
-
         Route::post('/approve/store/{id}',[\App\Http\Controllers\Admin\InvoiceController::class,'approve_store'])->name('invoices.approve.store');
+        Route::get('/invoice/print/list',[\App\Http\Controllers\Admin\InvoiceController::class,'printList'])->name('invoices.print.list');
+        Route::get('/invoice/print/{id}',[\App\Http\Controllers\Admin\InvoiceController::class,'printInvoice'])->name('invoices.print');
+
     });
 
 

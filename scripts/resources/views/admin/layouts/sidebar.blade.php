@@ -292,7 +292,14 @@
                   <li class="nav-item">
                     <a href="{{route('invoices.pending')}}" class="nav-link {{$route=='invoices.pending'?'active':''}}">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Approval Purchase</p>
+                      <p>Approval Invoice</p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="{{route('invoices.print.list')}}" class="nav-link {{$route=='invoices.print.list'?'active':''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Print Invoice</p>
                     </a>
                   </li>
                 </ul>

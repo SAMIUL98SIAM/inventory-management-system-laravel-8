@@ -16,6 +16,7 @@ use App\Models\PaymentDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 class InvoiceController extends Controller
 {
@@ -242,6 +243,21 @@ class InvoiceController extends Controller
             $invoice->save();
         });
         return redirect()->route('invoices.pending')->with('success','Invoice successfully saved');
+    }
+
+
+    public function printList()
+    {
+        $data['invoices']= Invoice::orderBy('date','desc')->orderBy('id','desc')->where('status',1)->get();
+        return view('admin.invoice.pdf.index',$data);
+    }
+
+    public function  printInvoice($id)
+    {
+        $data['invoice'] = Invoice::with(['invoice_detail'])->find($id);
+        $pdf = PDF::loadView('admin.invoice.pdf.invoice',$data);
+        $pdf->SetProtection(['copy','print'],'','pass');
+        return $pdf->stream('invoice.pdf');
     }
 }
 

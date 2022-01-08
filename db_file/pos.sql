@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2022 at 08:44 PM
+-- Generation Time: Jan 07, 2022 at 07:47 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.26
 
@@ -122,7 +122,8 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`id`, `name`, `mobile_no`, `email`, `address`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (1, 'Humayun', '01312569682', 'Usman@gmail.com', 'Monipura', 1, 1, NULL, '2022-01-05 06:31:32', '2022-01-05 06:31:32'),
-(2, 'imrul', '01992569681', 'kayesh@gmail.com', 'barishal', 1, 1, 1, '2022-01-05 06:31:52', '2022-01-05 06:31:59');
+(2, 'imrul', '01992569681', 'kayesh@gmail.com', 'barishal', 1, 1, 1, '2022-01-05 06:31:52', '2022-01-05 06:31:59'),
+(8, 'Rajib', '01992569680', NULL, 'Sidney', 1, NULL, NULL, '2022-01-07 09:08:32', '2022-01-07 09:08:32');
 
 -- --------------------------------------------------------
 
@@ -158,6 +159,15 @@ CREATE TABLE `invoices` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `invoices`
+--
+
+INSERT INTO `invoices` (`id`, `invoice_no`, `date`, `description`, `status`, `created_by`, `approved_by`, `created_at`, `updated_at`) VALUES
+(2, '1', '2022-01-07', 'dummy content', 1, 1, 1, '2022-01-07 10:10:32', '2022-01-07 12:35:26'),
+(3, '2', '2022-01-07', 'dsfdg', 1, 1, 1, '2022-01-07 12:36:23', '2022-01-07 12:39:17'),
+(4, '3', '2022-01-07', 'dsfdgfjh', 0, 1, NULL, '2022-01-07 12:37:11', '2022-01-07 12:37:11');
+
 -- --------------------------------------------------------
 
 --
@@ -177,6 +187,16 @@ CREATE TABLE `invoice_details` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `invoice_details`
+--
+
+INSERT INTO `invoice_details` (`id`, `date`, `invoice_id`, `category_id`, `product_id`, `selling_qty`, `unit_price`, `selling_price`, `status`, `created_at`, `updated_at`) VALUES
+(3, '2022-01-07', 2, 1, 5, 50, 900, 45000, 1, '2022-01-07 10:10:32', '2022-01-07 10:10:32'),
+(4, '2022-01-07', 2, 2, 1, 10, 15000, 150000, 1, '2022-01-07 10:10:32', '2022-01-07 10:10:32'),
+(5, '2022-01-07', 3, 3, 7, 4, 25, 100, 1, '2022-01-07 12:36:23', '2022-01-07 12:36:23'),
+(6, '2022-01-07', 4, 2, 1, 16, 2000, 32000, 1, '2022-01-07 12:37:11', '2022-01-07 12:37:11');
 
 -- --------------------------------------------------------
 
@@ -268,6 +288,15 @@ CREATE TABLE `payments` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `invoice_id`, `customer_id`, `paid_status`, `paid_amount`, `due_amount`, `total_amount`, `discount_amount`, `created_at`, `updated_at`) VALUES
+(2, 2, 2, 'partial_paid', 18000, 172000, 190000, 5000, '2022-01-07 10:10:32', '2022-01-07 10:10:32'),
+(3, 3, 2, 'full_paid', 100, 0, 100, NULL, '2022-01-07 12:36:23', '2022-01-07 12:36:23'),
+(4, 4, 1, 'full_paid', 32000, 0, 32000, NULL, '2022-01-07 12:37:11', '2022-01-07 12:37:11');
+
 -- --------------------------------------------------------
 
 --
@@ -277,12 +306,21 @@ CREATE TABLE `payments` (
 CREATE TABLE `payment_details` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `invoice_id` int(11) NOT NULL,
-  `cuurent_paid_amount` double DEFAULT NULL,
+  `current_paid_amount` double DEFAULT NULL,
   `date` date DEFAULT NULL,
   `updated_by` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `payment_details`
+--
+
+INSERT INTO `payment_details` (`id`, `invoice_id`, `current_paid_amount`, `date`, `updated_by`, `created_at`, `updated_at`) VALUES
+(2, 2, 18000, NULL, NULL, '2022-01-07 10:10:32', '2022-01-07 10:10:32'),
+(3, 3, 100, NULL, NULL, '2022-01-07 12:36:23', '2022-01-07 12:36:23'),
+(4, 4, 32000, NULL, NULL, '2022-01-07 12:37:11', '2022-01-07 12:37:11');
 
 -- --------------------------------------------------------
 
@@ -327,12 +365,12 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `supplier_id`, `unit_id`, `category_id`, `name`, `quantity`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 2, 'Walton Mobile 1042', 24, 1, 1, 1, '2022-01-05 08:18:17', '2022-01-06 11:07:27'),
+(1, 1, 2, 2, 'Walton Mobile 1042', 14, 1, 1, 1, '2022-01-05 08:18:17', '2022-01-07 12:35:26'),
 (3, 1, 2, 2, 'Walton Mobile 360', 0, 1, 1, 1, '2022-01-05 10:41:02', '2022-01-05 13:34:25'),
 (4, 1, 2, 2, 'Walton Mobile 500', 0, 1, 1, NULL, '2022-01-05 13:34:46', '2022-01-05 13:34:46'),
-(5, 2, 2, 1, 'boshundhara Cement', 100, 1, 1, NULL, '2022-01-05 13:35:15', '2022-01-06 10:32:56'),
+(5, 2, 2, 1, 'boshundhara Cement', 50, 1, 1, NULL, '2022-01-05 13:35:15', '2022-01-07 12:35:26'),
 (6, 2, 2, 1, 'Holcim Cement', 160, 1, 1, NULL, '2022-01-05 13:35:48', '2022-01-06 10:32:18'),
-(7, 3, 2, 3, 'Keya Soap', 0, 1, 1, NULL, '2022-01-06 12:30:12', '2022-01-06 12:30:12');
+(7, 3, 2, 3, 'Keya Soap', 1026, 1, 1, NULL, '2022-01-06 12:30:12', '2022-01-07 12:41:32');
 
 -- --------------------------------------------------------
 
@@ -368,7 +406,8 @@ INSERT INTO `purchases` (`id`, `supplier_id`, `category_id`, `product_id`, `purc
 (4, 2, 1, 5, 'kkk-111', '2022-01-07', 'dummy 3', 100, 500, 50000, 1, 1, NULL, '2022-01-06 06:26:46', '2022-01-06 06:26:46'),
 (5, 2, 1, 6, 'kkk-111', '2022-01-07', 'dummy 4', 40, 600, 24000, 1, 1, NULL, '2022-01-06 06:26:46', '2022-01-06 06:26:46'),
 (6, 1, 2, 1, 'uuu-312', '2022-01-08', NULL, 10, 12000, 120000, 1, 1, NULL, '2022-01-06 11:06:49', '2022-01-06 11:06:49'),
-(7, 3, 3, 7, 'UU-54', '2022-01-08', NULL, 30, 30, 900, 0, 1, NULL, '2022-01-06 12:30:53', '2022-01-06 12:30:53');
+(7, 3, 3, 7, 'UU-54', '2022-01-08', NULL, 30, 30, 900, 1, 1, NULL, '2022-01-06 12:30:53', '2022-01-06 12:30:53'),
+(8, 3, 3, 7, 'Uttam-190', '2022-01-07', 'Urgently', 1000, 30, 30000, 1, 1, NULL, '2022-01-07 12:41:12', '2022-01-07 12:41:12');
 
 -- --------------------------------------------------------
 
@@ -478,7 +517,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `usertype`, `name`, `email`, `email_verified_at`, `password`, `mobile`, `address`, `gender`, `image`, `code`, `role`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'Md Samiul', 'samiulsiam59@gmail.com', NULL, '$2y$10$YzwpdXM49h77Av6z7lG8FO6Rta.P6KlrrOxJq0fDh9qAb7DjsAHnK', '01992569682', 'Uttara, Dhaka', 'Male', '202201041748e5ed5f44-43aa-45f0-9cbe-35ebf0c512cf.jfif', NULL, 'Admin', 1, '9zvAWQVFCVPl0GpfXO8GLWmzwv31n9OeCZ5SFvg5QuLxJ3YHRzItiucWN2S1', '2022-01-04 11:30:21', '2022-01-04 11:49:30'),
+(1, 'admin', 'Md Samiul', 'samiulsiam59@gmail.com', NULL, '$2y$10$YzwpdXM49h77Av6z7lG8FO6Rta.P6KlrrOxJq0fDh9qAb7DjsAHnK', '01992569682', 'Uttara, Dhaka', 'Male', '202201041748e5ed5f44-43aa-45f0-9cbe-35ebf0c512cf.jfif', NULL, 'Admin', 1, 'y25RLxCggtqq0cAlzyWkGeZaVeVScGlsHWW8XSoubOXMRVAnblexBJsJDEM0', '2022-01-04 11:30:21', '2022-01-04 11:49:30'),
 (2, 'admin', 'Sharmin Mumu', 'mumu12@gmail.com', NULL, '$2y$10$haraVDR2KYoLjO8daboaleVPZYAYJLeI6QGua41do/E3jd1pdZ1g6', NULL, NULL, NULL, NULL, '6781', 'Operator', 1, NULL, '2022-01-04 11:46:48', '2022-01-04 11:46:48');
 
 --
@@ -629,7 +668,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -641,13 +680,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `invoice_details`
 --
 ALTER TABLE `invoice_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `logos`
@@ -665,13 +704,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `payment_details`
 --
 ALTER TABLE `payment_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -689,7 +728,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `sliders`
