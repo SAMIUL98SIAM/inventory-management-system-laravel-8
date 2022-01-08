@@ -137,6 +137,10 @@ Route::group(['middleware'=>['auth','admin']],function (){
         Route::get('/invoice/print/list',[\App\Http\Controllers\Admin\InvoiceController::class,'printList'])->name('invoices.print.list');
         Route::get('/invoice/print/{id}',[\App\Http\Controllers\Admin\InvoiceController::class,'printInvoice'])->name('invoices.print');
 
+        Route::get('/daily/inoice/report',[\App\Http\Controllers\Admin\InvoiceController::class,'dailyInvoiceReport'])->name('daily.invoice.report');
+
+        Route::get('/daily/inoice/print',[\App\Http\Controllers\Admin\InvoiceController::class,'dailyReport'])->name('daily.invoice.pdf');
+
     });
 
 
