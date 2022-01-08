@@ -144,6 +144,11 @@ Route::group(['middleware'=>['auth','admin']],function (){
     });
 
 
+    Route::prefix('stocks')->group(function(){
+        Route::get('/report',[\App\Http\Controllers\Admin\StockController::class,'report'])->name('stocks.report');
+        Route::get('/download',[\App\Http\Controllers\Admin\StockController::class,'download'])->name('stocks.download');
+    });
+
     Route::get('/get-category',[\App\Http\Controllers\Admin\DefaultController::class,'getCategory'])->name('get-category');
     Route::get('/get-product',[\App\Http\Controllers\Admin\DefaultController::class,'getProduct'])->name('get-product');
     Route::get('/check-product-stock',[\App\Http\Controllers\Admin\DefaultController::class,'getProductStock'])->name('check-product-stock');
