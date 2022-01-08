@@ -147,6 +147,10 @@ Route::group(['middleware'=>['auth','admin']],function (){
     Route::prefix('stocks')->group(function(){
         Route::get('/report',[\App\Http\Controllers\Admin\StockController::class,'report'])->name('stocks.report');
         Route::get('/download',[\App\Http\Controllers\Admin\StockController::class,'download'])->name('stocks.download');
+
+        Route::get('/report/supplier/product/wise',[\App\Http\Controllers\Admin\StockController::class,'reportSupplierProductWise'])->name('stocks.report.supplier.product.wise');
+        Route::get('/report/supplier/wise.pdf',[\App\Http\Controllers\Admin\StockController::class,'reportSupplierWisePdf'])->name('stocks.report.supplier.pdf');
+        Route::get('/report/product/wise.pdf',[\App\Http\Controllers\Admin\StockController::class,'reportProductWisePdf'])->name('stocks.report.product.pdf');
     });
 
     Route::get('/get-category',[\App\Http\Controllers\Admin\DefaultController::class,'getCategory'])->name('get-category');

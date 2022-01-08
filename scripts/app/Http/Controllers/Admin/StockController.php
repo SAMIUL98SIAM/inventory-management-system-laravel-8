@@ -44,17 +44,12 @@ class StockController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function reportSupplierProductWise()
     {
-
-        $product = new Product() ;
-        $product->supplier_id = $request->supplier_id ;
-        $product->unit_id = $request->unit_id ;
-        $product->category_id = $request->category_id ;
-        $product->name = $request->name ;
-        $product->created_by = Auth::user()->id;
-        $product->save();
-        return redirect()->route('products.view')->with('success','You Added Product');
+        $data['suppliers'] = Supplier::all();
+        $data['products'] = Product::all();
+        $data['categories'] = Category::all();
+        return view('admin.stock.report-supplier-product-wise',$data);
     }
 
     /**
@@ -63,9 +58,20 @@ class StockController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function reportSupplierWisePdf(Request $request)
     {
-        //
+        $data['allData'] = Product::orderBy('supplier_id','asc')->orderBy('category_id','asc')->where('supplier_id',$request->supplier_id)->get();
+        $pdf = PDF::loadView('admin.stock.pdf.supplier-wise-report',$data);
+        $pdf->SetProtection(['copy','print'],'','pass');
+        return $pdf->stream('supplier-wise-stock-report.pdf');
+    }
+
+    public function reportProductWisePdf(Request $request)
+    {
+        $data['product'] = Product::where('category_id',$request->category_id)->where('id',$request->product_id)->first();
+        $pdf = PDF::loadView('admin.stock.pdf.product-wise-report',$data);
+        $pdf->SetProtection(['copy','print'],'','pass');
+        return $pdf->stream('product-wise-stock-report.pdf');
     }
 
     /**

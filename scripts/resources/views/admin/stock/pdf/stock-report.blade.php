@@ -71,6 +71,10 @@
                         @endforeach
                     </tbody>
                 </table>
+                @php
+                    $date = new DateTime('now', new DateTimezone('Asia/Dhaka'))
+                @endphp
+                <i>Printing time: {{$date->format('F j, Y, g:i a')}}</i>
             </div>
         </div>
         <div class="row">

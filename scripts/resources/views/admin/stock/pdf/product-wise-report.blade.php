@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
-    <title>Invoice Report PDF</title>
+    <title>Product Wise Stock Report PDF</title>
 </head>
 <body>
     <div class="container">
@@ -32,11 +32,14 @@
 
         <div class="row">
             <div class="col-md-12">
-                <hr style="margin-bottom: 0px">
                 <table width="100%">
                     <tbody>
                         <tr>
-
+                            <td width="36%"></td>
+                            <td>
+                                <u><strong><span style="font-size: 15px">Product Wise Stock Report</span></strong></u>
+                            </td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>
@@ -44,40 +47,24 @@
         </div>
         <div class="row">
             <div class="col-md-12">
+
                 <table border="1" width="100%">
                     <thead>
                         <tr>
-                            <th>Serial</th>
-                            <th>Customer Name</th>
-                            <th>Invoice No</th>
-                            <th>Date</th>
-                            <th>Description</th>
-                            <th>Amount</th>
+                            <th>Supplier Name</th>
+                            <th>Unit</th>
+                            <th>Category</th>
+                            <th>Name</th>
+                            <th>Soldout</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $total_sum = 0;
-                        @endphp
-                        @foreach ($allData as $key=>$invoice)
                         <tr>
-                            <td>{{$key+1}}</td>
-                            <td>
-                                {{$invoice->payment->customer->name}}
-                                ({{$invoice->payment->customer->mobile_no}}-{{$invoice->payment->customer->address}})
-                            </td>
-                            <td>#{{$invoice->invoice_no}}</td>
-                            <td>{{date('d-m-Y',strtotime($invoice->date))}}</td>
-                            <td>{{$invoice->description}}</td>
-                            <td>{{$invoice->payment->total_amount}}</td>
-                        @php
-                            $total_sum += $invoice->payment->total_amount ;
-                        @endphp
-                        </tr>
-                        @endforeach
-                        <tr>
-                            <td colspan="5">Grand Total</td>
-                            <td>{{$total_sum}}</td>
+                            <td>{{$product->supplier->name}}</td>
+                            <td>{{$product->unit->name}}</td>
+                            <td>{{$product->category->name}}</td>
+                            <td>{{$product->name}}</td>
+                            <td>{{$product->quantity}}</td>
                         </tr>
                     </tbody>
                 </table>

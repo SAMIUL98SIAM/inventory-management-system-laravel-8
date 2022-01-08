@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Manage Product</h1>
+                    <h1 class="m-0">Manage Stock Report</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                    <li class="breadcrumb-item active">Product</li>
+                    <li class="breadcrumb-item active">Stock Report</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -30,7 +30,7 @@
             <!-- Custom tabs (Charts with tabs)-->
             <div class="card">
                 <div class="card-header">
-                    <h3>product List</h3>
+                    <h3>Stock Report List</h3>
                     <a class="btn btn-success float-right btn-sm" href="{{route('stocks.download')}}" target="_blank"><i class="fa fa-download"> Download PDF</i></a>
 
                 </div><!-- /.card-header -->

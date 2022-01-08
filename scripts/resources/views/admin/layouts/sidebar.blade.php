@@ -326,9 +326,17 @@
                   <li class="nav-item">
                     <a href="{{route('stocks.report')}}" class="nav-link {{$route=='stocks.report'?'active':''}}">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>View Stock</p>
+                      <p>Stock Report</p>
                     </a>
                   </li>
+
+                  <li class="nav-item">
+                    <a href="{{route('stocks.report.supplier.product.wise')}}" class="nav-link {{$route=='stocks.report.supplier.product.wise'?'active':''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Product/Supplier Wise Stock</p>
+                    </a>
+                  </li>
+
                 </ul>
             </li>
 
