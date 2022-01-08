@@ -55,15 +55,24 @@
                             <th>Unit</th>
                             <th>Category</th>
                             <th>Name</th>
-                            <th>Soldout</th>
+                            <th>In Quantity</th>
+                            <th>Out Quantity</th>
+                            <th>Stock</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $buying_total = App\Models\Purchase::where('category_id',$product->category_id)->where('product_id',$product->id)->where('status',1)->sum('buying_qty');
+
+                            $selling_total = App\Models\InvoiceDetail::where('category_id',$product->category_id)->where('product_id',$product->id)->where('status',1)->sum('selling_qty');
+                        @endphp
                         <tr>
                             <td>{{$product->supplier->name}}</td>
                             <td>{{$product->unit->name}}</td>
                             <td>{{$product->category->name}}</td>
                             <td>{{$product->name}}</td>
+                            <td>{{$buying_total}}</td>
+                            <td>{{$selling_total}}</td>
                             <td>{{$product->quantity}}</td>
                         </tr>
                     </tbody>
