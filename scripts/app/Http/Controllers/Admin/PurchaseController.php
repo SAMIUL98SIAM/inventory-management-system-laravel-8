@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
@@ -81,11 +82,22 @@ class PurchaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function purchaseReport()
     {
-        //
+        return view('admin.purchase.daily-purchase-report');
     }
 
+    public function purchaseReportPdf(Request $request)
+    {
+        $sdate = date('Y-m-d',strtotime($request->start_date)) ;
+        $edate = date('Y-m-d',strtotime($request->end_date)) ;
+        $data['allData'] = Purchase::whereBetween('date',[$sdate,$edate])->where('status',1)->orderBy('supplier_id')->orderBy('category_id')->orderBy('product_id')->get();
+        $data['start_date'] =  date('Y-m-d',strtotime($request->start_date)) ;
+        $data['end_date'] = date('Y-m-d',strtotime($request->end_date)) ;
+        $pdf = PDF::loadView('admin.purchase.pdf.daily-purchase-report',$data);
+        $pdf->SetProtection(['copy','print'],'','pass');
+        return $pdf->stream('invoice-report.pdf');
+    }
     /**
      * Show the form for editing the specified resource.
      *

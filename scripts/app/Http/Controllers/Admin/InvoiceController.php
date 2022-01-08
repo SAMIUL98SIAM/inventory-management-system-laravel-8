@@ -275,7 +275,7 @@ class InvoiceController extends Controller
         $data['allData'] = Invoice::whereBetween('date',[$sdate,$edate])->where('status',1)->get();
         $data['start_date'] =  date('Y-m-d',strtotime($request->start_date)) ;
         $data['end_date'] = date('Y-m-d',strtotime($request->end_date)) ;
-        $pdf = PDF::loadView('admin.invoice.pdf.invoice-report',$data);
+        $pdf = PDF::loadView('admin.invoice.pdf.daily-invoice-report',$data);
         $pdf->SetProtection(['copy','print'],'','pass');
         return $pdf->stream('invoice-report.pdf');
     }

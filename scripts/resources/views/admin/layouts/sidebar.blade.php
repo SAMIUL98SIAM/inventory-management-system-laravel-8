@@ -269,6 +269,13 @@
                       <p>Approval Purchase</p>
                     </a>
                   </li>
+
+                  <li class="nav-item">
+                    <a href="{{route('daily.purchases.report')}}" class="nav-link {{$route=='daily.purchases.report'?'active':''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Daily Purchase Report</p>
+                    </a>
+                  </li>
                 </ul>
             </li>
 

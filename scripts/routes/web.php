@@ -120,6 +120,11 @@ Route::group(['middleware'=>['auth','admin']],function (){
 
         Route::get('/pending',[\App\Http\Controllers\Admin\PurchaseController::class,'pending'])->name('purchases.pending');
         Route::get('/approve/{id}',[\App\Http\Controllers\Admin\PurchaseController::class,'approve'])->name('purchases.approve');
+
+        Route::get('/daily/purchase/report',[\App\Http\Controllers\Admin\PurchaseController::class,'purchaseReport'])->name('daily.purchases.report');
+        Route::get('/daily/purchase/report/pdf',[\App\Http\Controllers\Admin\PurchaseController::class,'purchaseReportPdf'])->name('daily.purchase.pdf');
+
+
     });
 
 
