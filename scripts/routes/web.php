@@ -87,6 +87,9 @@ Route::group(['middleware'=>['auth','admin']],function (){
         Route::post('/create',[\App\Http\Controllers\Admin\CustomerController::class,'store'])->name('customers.store');
         Route::put('/update/{id}',[\App\Http\Controllers\Admin\CustomerController::class,'update'])->name('customers.update');
         Route::get('/delete/{id}',[\App\Http\Controllers\Admin\CustomerController::class,'destroy'])->name('customers.delete');
+
+        Route::get('/credit/customer',[\App\Http\Controllers\Admin\CustomerController::class,'creditCustomer'])->name('customers.credit');
+        Route::get('/credit/customer/pdf',[\App\Http\Controllers\Admin\CustomerController::class,'creditCustomerPdf'])->name('customers.credit.pdf');
     });
 
     Route::prefix('units')->group(function(){

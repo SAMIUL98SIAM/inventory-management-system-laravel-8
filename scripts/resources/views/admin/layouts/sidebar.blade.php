@@ -185,6 +185,15 @@
                       <p>View Customer</p>
                     </a>
                   </li>
+
+                  <li class="nav-item">
+                    <a href="{{route('customers.credit')}}" class="nav-link {{$route=='customers.credit'?'active':''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Credit Customer</p>
+                    </a>
+                  </li>
+
+
                 </ul>
             </li>
 

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -26,9 +28,17 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function creditCustomer()
     {
-        //
+        $data['allData']= Payment::whereIn('paid_status',['full_due','partial_paid'])->get();
+        return view('admin.customer.credit-customer',$data);
+    }
+
+    public function creditCustomerPdf(){
+        $data['allData']= Payment::whereIn('paid_status',['full_due','partial_paid'])->get();
+        $pdf = PDF::loadView('admin.customer.pdf.credit-customer',$data);
+        $pdf->SetProtection(['copy','print'],'','pass');
+        return $pdf->stream('invoice.pdf');
     }
 
     /**
