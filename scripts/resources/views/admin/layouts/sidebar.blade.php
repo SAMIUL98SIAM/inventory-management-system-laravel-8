@@ -193,6 +193,13 @@
                     </a>
                   </li>
 
+                  <li class="nav-item">
+                    <a href="{{route('paid.customers.report')}}" class="nav-link {{$route=='paid.customers.report'?'active':''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Paid Customer</p>
+                    </a>
+                  </li>
+
 
                 </ul>
             </li>

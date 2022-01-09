@@ -42,6 +42,20 @@ class CustomerController extends Controller
         return $pdf->stream('invoice.pdf');
     }
 
+    public function paid_customer()
+    {
+        $data['allData']= Payment::where('paid_status','!=','full_due')->get();
+        return view('admin.customer.paid-customer',$data);
+    }
+
+    public function paid_customer_pdf()
+    {
+        $data['allData']= Payment::where('paid_status','!=','full_due')->get();
+        $pdf = PDF::loadView('admin.customer.pdf.paid-customer',$data);
+        $pdf->SetProtection(['copy','print'],'','pass');
+        return $pdf->stream('invoice.pdf');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -70,10 +84,7 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
