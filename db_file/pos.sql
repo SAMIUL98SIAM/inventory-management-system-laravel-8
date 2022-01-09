@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2022 at 07:47 PM
+-- Generation Time: Jan 09, 2022 at 12:04 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.26
 
@@ -166,7 +166,9 @@ CREATE TABLE `invoices` (
 INSERT INTO `invoices` (`id`, `invoice_no`, `date`, `description`, `status`, `created_by`, `approved_by`, `created_at`, `updated_at`) VALUES
 (2, '1', '2022-01-07', 'dummy content', 1, 1, 1, '2022-01-07 10:10:32', '2022-01-07 12:35:26'),
 (3, '2', '2022-01-07', 'dsfdg', 1, 1, 1, '2022-01-07 12:36:23', '2022-01-07 12:39:17'),
-(4, '3', '2022-01-07', 'dsfdgfjh', 0, 1, NULL, '2022-01-07 12:37:11', '2022-01-07 12:37:11');
+(4, '3', '2022-01-07', 'dsfdgfjh', 1, 1, 1, '2022-01-07 12:37:11', '2022-01-08 15:16:38'),
+(5, '4', '2008-01-02', 'Dummy', 1, 1, 1, '2022-01-08 09:45:16', '2022-01-08 09:45:38'),
+(6, '5', '2022-01-08', 'dummy', 1, 1, 1, '2022-01-08 15:14:15', '2022-01-08 15:14:50');
 
 -- --------------------------------------------------------
 
@@ -196,7 +198,14 @@ INSERT INTO `invoice_details` (`id`, `date`, `invoice_id`, `category_id`, `produ
 (3, '2022-01-07', 2, 1, 5, 50, 900, 45000, 1, '2022-01-07 10:10:32', '2022-01-07 10:10:32'),
 (4, '2022-01-07', 2, 2, 1, 10, 15000, 150000, 1, '2022-01-07 10:10:32', '2022-01-07 10:10:32'),
 (5, '2022-01-07', 3, 3, 7, 4, 25, 100, 1, '2022-01-07 12:36:23', '2022-01-07 12:36:23'),
-(6, '2022-01-07', 4, 2, 1, 16, 2000, 32000, 1, '2022-01-07 12:37:11', '2022-01-07 12:37:11');
+(6, '2022-01-07', 4, 2, 1, 16, 2000, 32000, 1, '2022-01-07 12:37:11', '2022-01-07 12:37:11'),
+(7, '2008-01-02', 5, 1, 5, 10, 900, 9000, 1, '2022-01-08 09:45:16', '2022-01-08 09:45:16'),
+(8, '2008-01-02', 5, 1, 6, 50, 750, 37500, 1, '2022-01-08 09:45:16', '2022-01-08 09:45:16'),
+(9, '2022-01-08', 6, 2, 1, 10, 2500, 25000, 1, '2022-01-08 15:14:15', '2022-01-08 15:14:50'),
+(10, '2022-01-08', 6, 2, 4, 10, 2000, 20000, 1, '2022-01-08 15:14:15', '2022-01-08 15:14:50'),
+(11, '2022-01-08', 6, 2, 3, 5, 2500, 12500, 1, '2022-01-08 15:14:15', '2022-01-08 15:14:50'),
+(12, '2022-01-08', 6, 1, 5, 10, 1200, 12000, 1, '2022-01-08 15:14:15', '2022-01-08 15:14:50'),
+(13, '2022-01-08', 6, 1, 6, 5, 1100, 5500, 1, '2022-01-08 15:14:15', '2022-01-08 15:14:50');
 
 -- --------------------------------------------------------
 
@@ -295,7 +304,9 @@ CREATE TABLE `payments` (
 INSERT INTO `payments` (`id`, `invoice_id`, `customer_id`, `paid_status`, `paid_amount`, `due_amount`, `total_amount`, `discount_amount`, `created_at`, `updated_at`) VALUES
 (2, 2, 2, 'partial_paid', 18000, 172000, 190000, 5000, '2022-01-07 10:10:32', '2022-01-07 10:10:32'),
 (3, 3, 2, 'full_paid', 100, 0, 100, NULL, '2022-01-07 12:36:23', '2022-01-07 12:36:23'),
-(4, 4, 1, 'full_paid', 32000, 0, 32000, NULL, '2022-01-07 12:37:11', '2022-01-07 12:37:11');
+(4, 4, 1, 'full_paid', 32000, 0, 32000, NULL, '2022-01-07 12:37:11', '2022-01-07 12:37:11'),
+(5, 5, 1, 'full_paid', 46000, 0, 46000, 500, '2022-01-08 09:45:16', '2022-01-08 09:45:16'),
+(6, 6, 8, 'partial_paid', 60000, 14000, 74000, 1000, '2022-01-08 15:14:15', '2022-01-08 15:14:15');
 
 -- --------------------------------------------------------
 
@@ -320,7 +331,9 @@ CREATE TABLE `payment_details` (
 INSERT INTO `payment_details` (`id`, `invoice_id`, `current_paid_amount`, `date`, `updated_by`, `created_at`, `updated_at`) VALUES
 (2, 2, 18000, NULL, NULL, '2022-01-07 10:10:32', '2022-01-07 10:10:32'),
 (3, 3, 100, NULL, NULL, '2022-01-07 12:36:23', '2022-01-07 12:36:23'),
-(4, 4, 32000, NULL, NULL, '2022-01-07 12:37:11', '2022-01-07 12:37:11');
+(4, 4, 32000, NULL, NULL, '2022-01-07 12:37:11', '2022-01-07 12:37:11'),
+(5, 5, 46000, NULL, NULL, '2022-01-08 09:45:16', '2022-01-08 09:45:16'),
+(6, 6, 60000, NULL, NULL, '2022-01-08 15:14:15', '2022-01-08 15:14:15');
 
 -- --------------------------------------------------------
 
@@ -365,11 +378,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `supplier_id`, `unit_id`, `category_id`, `name`, `quantity`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 2, 'Walton Mobile 1042', 14, 1, 1, 1, '2022-01-05 08:18:17', '2022-01-07 12:35:26'),
-(3, 1, 2, 2, 'Walton Mobile 360', 0, 1, 1, 1, '2022-01-05 10:41:02', '2022-01-05 13:34:25'),
-(4, 1, 2, 2, 'Walton Mobile 500', 0, 1, 1, NULL, '2022-01-05 13:34:46', '2022-01-05 13:34:46'),
-(5, 2, 2, 1, 'boshundhara Cement', 50, 1, 1, NULL, '2022-01-05 13:35:15', '2022-01-07 12:35:26'),
-(6, 2, 2, 1, 'Holcim Cement', 160, 1, 1, NULL, '2022-01-05 13:35:48', '2022-01-06 10:32:18'),
+(1, 1, 2, 2, 'Walton Mobile 1042', 4, 1, 1, 1, '2022-01-05 08:18:17', '2022-01-08 15:16:38'),
+(3, 1, 2, 2, 'Walton Mobile 360', 100, 1, 1, 1, '2022-01-05 10:41:02', '2022-01-08 15:14:50'),
+(4, 1, 2, 2, 'Walton Mobile 500', 0, 1, 1, NULL, '2022-01-05 13:34:46', '2022-01-08 15:14:50'),
+(5, 2, 2, 1, 'boshundhara Cement', 55, 1, 1, NULL, '2022-01-05 13:35:15', '2022-01-08 15:14:50'),
+(6, 2, 2, 1, 'Holcim Cement', 975, 1, 1, NULL, '2022-01-05 13:35:48', '2022-01-08 15:14:50'),
 (7, 3, 2, 3, 'Keya Soap', 1026, 1, 1, NULL, '2022-01-06 12:30:12', '2022-01-07 12:41:32');
 
 -- --------------------------------------------------------
@@ -401,13 +414,20 @@ CREATE TABLE `purchases` (
 --
 
 INSERT INTO `purchases` (`id`, `supplier_id`, `category_id`, `product_id`, `purchase_no`, `date`, `description`, `buying_qty`, `unit_price`, `buying_price`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 1, 'kkk-111', '2022-01-01', 'dummy', 14, 1500, 21000, 1, 1, NULL, '2022-01-05 16:20:18', '2022-01-05 16:20:18'),
+(1, 1, 2, 1, 'kkk-111', '2022-01-01', 'dummy', 26, 1500, 21000, 1, 1, NULL, '2022-01-05 16:20:18', '2022-01-05 16:20:18'),
 (3, 2, 1, 6, 'kkk-111', '2022-01-01', 'dummy 2', 60, 7000, 420000, 1, 1, NULL, '2022-01-05 16:20:18', '2022-01-05 16:20:18'),
 (4, 2, 1, 5, 'kkk-111', '2022-01-07', 'dummy 3', 100, 500, 50000, 1, 1, NULL, '2022-01-06 06:26:46', '2022-01-06 06:26:46'),
 (5, 2, 1, 6, 'kkk-111', '2022-01-07', 'dummy 4', 40, 600, 24000, 1, 1, NULL, '2022-01-06 06:26:46', '2022-01-06 06:26:46'),
 (6, 1, 2, 1, 'uuu-312', '2022-01-08', NULL, 10, 12000, 120000, 1, 1, NULL, '2022-01-06 11:06:49', '2022-01-06 11:06:49'),
 (7, 3, 3, 7, 'UU-54', '2022-01-08', NULL, 30, 30, 900, 1, 1, NULL, '2022-01-06 12:30:53', '2022-01-06 12:30:53'),
-(8, 3, 3, 7, 'Uttam-190', '2022-01-07', 'Urgently', 1000, 30, 30000, 1, 1, NULL, '2022-01-07 12:41:12', '2022-01-07 12:41:12');
+(8, 3, 3, 7, 'Uttam-190', '2022-01-07', 'Urgently', 1000, 30, 30000, 1, 1, NULL, '2022-01-07 12:41:12', '2022-01-07 12:41:12'),
+(9, 1, 2, 3, 'LLL-901', '2022-01-15', NULL, 100, 6000, 600000, 1, 1, NULL, '2022-01-08 07:02:24', '2022-01-08 07:02:24'),
+(10, 2, 1, 6, 'LLL-901', '2022-01-15', NULL, 900, 900, 810000, 1, 1, NULL, '2022-01-08 07:02:24', '2022-01-08 07:02:24'),
+(11, 1, 2, 1, 'uu-1236', '2022-01-09', 'dummy', 20, 900, 18000, 1, 1, NULL, '2022-01-08 15:08:28', '2022-01-08 15:08:28'),
+(12, 1, 2, 4, 'uu-1236', '2022-01-09', 'dummy', 10, 1200, 12000, 1, 1, NULL, '2022-01-08 15:08:28', '2022-01-08 15:08:28'),
+(13, 1, 2, 3, 'uu-1236', '2022-01-09', 'dummy', 5, 1500, 7500, 1, 1, NULL, '2022-01-08 15:08:28', '2022-01-08 15:08:28'),
+(14, 2, 1, 5, 'uu-1236', '2022-01-09', 'dummy', 25, 1000, 25000, 1, 1, NULL, '2022-01-08 15:08:28', '2022-01-08 15:08:28'),
+(15, 2, 1, 6, 'uu-1236', '2022-01-09', 'dummy', 30, 950, 28500, 1, 1, NULL, '2022-01-08 15:08:28', '2022-01-08 15:08:28');
 
 -- --------------------------------------------------------
 
@@ -517,7 +537,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `usertype`, `name`, `email`, `email_verified_at`, `password`, `mobile`, `address`, `gender`, `image`, `code`, `role`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'Md Samiul', 'samiulsiam59@gmail.com', NULL, '$2y$10$YzwpdXM49h77Av6z7lG8FO6Rta.P6KlrrOxJq0fDh9qAb7DjsAHnK', '01992569682', 'Uttara, Dhaka', 'Male', '202201041748e5ed5f44-43aa-45f0-9cbe-35ebf0c512cf.jfif', NULL, 'Admin', 1, 'y25RLxCggtqq0cAlzyWkGeZaVeVScGlsHWW8XSoubOXMRVAnblexBJsJDEM0', '2022-01-04 11:30:21', '2022-01-04 11:49:30'),
+(1, 'admin', 'Md Samiul', 'samiulsiam59@gmail.com', NULL, '$2y$10$YzwpdXM49h77Av6z7lG8FO6Rta.P6KlrrOxJq0fDh9qAb7DjsAHnK', '01992569682', 'Uttara, Dhaka', 'Male', '202201041748e5ed5f44-43aa-45f0-9cbe-35ebf0c512cf.jfif', NULL, 'Admin', 1, 'W9S4awcIhf92ukCOqMmq7cl45Cij0V3TMckylypqTCNDIDwVlpJEUkaKFfA4', '2022-01-04 11:30:21', '2022-01-04 11:49:30'),
 (2, 'admin', 'Sharmin Mumu', 'mumu12@gmail.com', NULL, '$2y$10$haraVDR2KYoLjO8daboaleVPZYAYJLeI6QGua41do/E3jd1pdZ1g6', NULL, NULL, NULL, NULL, '6781', 'Operator', 1, NULL, '2022-01-04 11:46:48', '2022-01-04 11:46:48');
 
 --
@@ -680,13 +700,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `invoice_details`
 --
 ALTER TABLE `invoice_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `logos`
@@ -704,13 +724,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `payment_details`
 --
 ALTER TABLE `payment_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -728,7 +748,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `sliders`

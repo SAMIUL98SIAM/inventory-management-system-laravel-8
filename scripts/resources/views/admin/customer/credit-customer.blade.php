@@ -61,7 +61,7 @@
                                 <td>{{date("d-m-Y",strtotime($payment->invoice->date))}}</td>
                                 <td>{{$payment->due_amount}} TK</td>
                                 <td>
-                                    <a title="Edit" class="btn btn-sm btn-primary" href=""><i class="fa fa-edit"></i></a>
+                                    <a title="Edit" class="btn btn-sm btn-primary" href="{{route('customers.invoice.edit',$payment->invoice_id)}}"><i class="fa fa-edit"></i></a>
                                     <a title="Details" class="btn btn-sm btn-success" href=""><i class="fa fa-eye"></i></a>
                                 </td>
                             </tr>

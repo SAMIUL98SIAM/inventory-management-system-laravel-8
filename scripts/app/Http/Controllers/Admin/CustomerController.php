@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Payment;
+use App\Models\PaymentDetail;
 use Illuminate\Support\Facades\Auth;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
 use Illuminate\Http\Request;
@@ -80,9 +81,42 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function invoice_edit($invoice_id)
     {
-        //
+       $data['date'] = date('Y-m-d');
+       $data['payment'] = Payment::where('invoice_id',$invoice_id)->first();
+       return view('admin.customer.edit-invoice',$data);
+    }
+
+    public function invoice_update(Request $request,$invoice_id)
+    {
+        if($request->new_paid_amount<$request->paid_amount)
+        {
+           return redirect()->back()->with('error','Sorry! you paid maximum value');
+        }
+        else
+        {
+           $payment = Payment::where('invoice_id',$invoice_id)->first();
+           $payment_detail = new PaymentDetail();
+           $payment->paid_status = $request->paid_status ;
+            if($request->paid_status == 'full_paid')
+            {
+               $payment->paid_amount = Payment::where('invoice_id',$invoice_id)->first()['paid_amount']+$request->new_paid_amount ;
+               $payment->due_amount = 0 ;
+               $payment_detail->current_paid_amount = $request->new_paid_amount;
+            }
+            elseif($request->paid_status == 'partial_paid')
+            {
+                $payment->paid_amount = Payment::where('invoice_id',$invoice_id)->first()['paid_amount'] + $request->paid_amount ;
+                $payment->due_amount = Payment::where('invoice_id',$invoice_id)->first()['due_amount'] - $request->paid_amount ;
+                $payment_detail->current_paid_amount = $request->paid_amount;
+            }
+            $payment->save();
+            $payment_detail->invoice_id = $invoice_id ;
+            $payment_detail->date = date('Y-m-d',strtotime($request->date));
+            $payment_detail->save();
+            return redirect()->route('customers.credit')->with('success','Data saved successfully');
+        }
     }
 
     /**

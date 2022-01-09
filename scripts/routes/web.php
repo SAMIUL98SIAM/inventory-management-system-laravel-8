@@ -90,6 +90,9 @@ Route::group(['middleware'=>['auth','admin']],function (){
 
         Route::get('/credit/customer',[\App\Http\Controllers\Admin\CustomerController::class,'creditCustomer'])->name('customers.credit');
         Route::get('/credit/customer/pdf',[\App\Http\Controllers\Admin\CustomerController::class,'creditCustomerPdf'])->name('customers.credit.pdf');
+
+        Route::get('/invoice/edit/{invoice_id}',[\App\Http\Controllers\Admin\CustomerController::class,'invoice_edit'])->name('customers.invoice.edit');
+        Route::post('/invoice/update/{invoice_id}',[\App\Http\Controllers\Admin\CustomerController::class,'invoice_update'])->name('customers.invoice.update');
     });
 
     Route::prefix('units')->group(function(){
@@ -135,7 +138,7 @@ Route::group(['middleware'=>['auth','admin']],function (){
         Route::get('/view',[\App\Http\Controllers\Admin\InvoiceController::class,'index'])->name('invoices.view');
         Route::get('/create',[\App\Http\Controllers\Admin\InvoiceController::class,'create'])->name('invoices.create');
         Route::post('/create',[\App\Http\Controllers\Admin\InvoiceController::class,'store'])->name('invoices.store');
-        Route::get('/edit/{id}',[\App\Http\Controllers\Admin\InvoiceController::class,'edit'])->name('invoices.edit');
+
         Route::post('/update/{id}',[\App\Http\Controllers\Admin\InvoiceController::class,'update'])->name('invoices.update');
         Route::get('/delete/{id}',[\App\Http\Controllers\Admin\InvoiceController::class,'destroy'])->name('invoices.delete');
 
