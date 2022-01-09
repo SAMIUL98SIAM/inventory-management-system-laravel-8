@@ -93,6 +93,8 @@ Route::group(['middleware'=>['auth','admin']],function (){
 
         Route::get('/invoice/edit/{invoice_id}',[\App\Http\Controllers\Admin\CustomerController::class,'invoice_edit'])->name('customers.invoice.edit');
         Route::post('/invoice/update/{invoice_id}',[\App\Http\Controllers\Admin\CustomerController::class,'invoice_update'])->name('customers.invoice.update');
+        Route::get('/invoice/details/pdf/{invoice_id}',[\App\Http\Controllers\Admin\CustomerController::class,'invoiceDetailsPdf'])->name('customers.invoice.detail.pdf');
+
     });
 
     Route::prefix('units')->group(function(){

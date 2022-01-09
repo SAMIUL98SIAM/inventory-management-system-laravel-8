@@ -142,7 +142,7 @@ class InvoiceController extends Controller
                         }
                         $payment->save();
                         $payment_details->invoice_id = $invoice->id ;
-                        $payment_details->date = $request->date('Y-m-d',strtotime($request->date));
+                        $payment_details->date = date('Y-m-d',strtotime($request->date));
                         $payment_details->save();
                     }
                 });

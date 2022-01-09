@@ -119,6 +119,14 @@ class CustomerController extends Controller
         }
     }
 
+
+    public function invoiceDetailsPdf($invoice_id)
+    {
+        $data['payment'] = Payment::where('invoice_id',$invoice_id)->first();
+        $pdf = PDF::loadView('admin.customer.pdf.customer-invoice-detail',$data);
+        $pdf->SetProtection(['copy','print'],'','pass');
+        return $pdf->stream('invoice-report.pdf');
+    }
     /**
      * Update the specified resource in storage.
      *
