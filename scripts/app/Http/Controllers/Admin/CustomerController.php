@@ -56,6 +56,29 @@ class CustomerController extends Controller
         return $pdf->stream('invoice.pdf');
     }
 
+
+    public function customerWiseReport()
+    {
+        $data['customers'] = Customer::all();
+        return view('admin.customer.customer-wise-report',$data);
+    }
+
+    public function customerWiseCreditReport(Request $request)
+    {
+        $data['allData']= Payment::where('customer_id',$request->customer_id)->whereIn('paid_status',['full_due','partial_paid'])->get();
+        $pdf = PDF::loadView('admin.customer.pdf.customer-wise-credit',$data);
+        $pdf->SetProtection(['copy','print'],'','pass');
+        return $pdf->stream('invoice.pdf');
+    }
+
+    public function customerWisePaidReport(Request $request)
+    {
+        $data['allData']= Payment::where('customer_id',$request->customer_id)->where('paid_status','!=','full_due')->get();
+        $pdf = PDF::loadView('admin.customer.pdf.customer-wise-paid',$data);
+        $pdf->SetProtection(['copy','print'],'','pass');
+        return $pdf->stream('invoice.pdf');
+    }
+
     /**
      * Store a newly created resource in storage.
      *

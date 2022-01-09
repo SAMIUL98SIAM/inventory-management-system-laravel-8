@@ -88,17 +88,21 @@ Route::group(['middleware'=>['auth','admin']],function (){
         Route::put('/update/{id}',[\App\Http\Controllers\Admin\CustomerController::class,'update'])->name('customers.update');
         Route::get('/delete/{id}',[\App\Http\Controllers\Admin\CustomerController::class,'destroy'])->name('customers.delete');
 
-        Route::get('/credit/customer',[\App\Http\Controllers\Admin\CustomerController::class,'creditCustomer'])->name('customers.credit');
-        Route::get('/credit/customer/pdf',[\App\Http\Controllers\Admin\CustomerController::class,'creditCustomerPdf'])->name('customers.credit.pdf');
+        Route::get('/credit',[\App\Http\Controllers\Admin\CustomerController::class,'creditCustomer'])->name('customers.credit');
+        Route::get('/credit/pdf',[\App\Http\Controllers\Admin\CustomerController::class,'creditCustomerPdf'])->name('customers.credit.pdf');
 
         Route::get('/invoice/edit/{invoice_id}',[\App\Http\Controllers\Admin\CustomerController::class,'invoice_edit'])->name('customers.invoice.edit');
         Route::post('/invoice/update/{invoice_id}',[\App\Http\Controllers\Admin\CustomerController::class,'invoice_update'])->name('customers.invoice.update');
         Route::get('/invoice/details/pdf/{invoice_id}',[\App\Http\Controllers\Admin\CustomerController::class,'invoiceDetailsPdf'])->name('customers.invoice.detail.pdf');
 
 
-        Route::get('/paid/customer/report',[\App\Http\Controllers\Admin\CustomerController::class,'paid_customer'])->name('paid.customers.report');
+        Route::get('/paid/report',[\App\Http\Controllers\Admin\CustomerController::class,'paid_customer'])->name('paid.customers.report');
+        Route::get('/paid/report/pdf',[\App\Http\Controllers\Admin\CustomerController::class,'paid_customer_pdf'])->name('paid.customers.report.pdf');
 
-        Route::get('/paid/customer/report/pdf',[\App\Http\Controllers\Admin\CustomerController::class,'paid_customer_pdf'])->name('paid.customers.report.pdf');
+        Route::get('/wise/report',[\App\Http\Controllers\Admin\CustomerController::class,'customerWiseReport'])->name('customers.wise.report');
+
+        Route::get('/wise/credit/report',[\App\Http\Controllers\Admin\CustomerController::class,'customerWiseCreditReport'])->name('customers.wise.credit.report');
+        Route::get('/wise/paid/report',[\App\Http\Controllers\Admin\CustomerController::class,'customerWisePaidReport'])->name('customers.wise.paid.report');
 
     });
 
@@ -134,8 +138,8 @@ Route::group(['middleware'=>['auth','admin']],function (){
         Route::get('/pending',[\App\Http\Controllers\Admin\PurchaseController::class,'pending'])->name('purchases.pending');
         Route::get('/approve/{id}',[\App\Http\Controllers\Admin\PurchaseController::class,'approve'])->name('purchases.approve');
 
-        Route::get('/daily/purchase/report',[\App\Http\Controllers\Admin\PurchaseController::class,'purchaseReport'])->name('daily.purchases.report');
-        Route::get('/daily/purchase/report/pdf',[\App\Http\Controllers\Admin\PurchaseController::class,'purchaseReportPdf'])->name('daily.purchase.pdf');
+        Route::get('/daily/report',[\App\Http\Controllers\Admin\PurchaseController::class,'purchaseReport'])->name('daily.purchases.report');
+        Route::get('/daily/report/pdf',[\App\Http\Controllers\Admin\PurchaseController::class,'purchaseReportPdf'])->name('daily.purchase.pdf');
 
 
     });
@@ -152,12 +156,12 @@ Route::group(['middleware'=>['auth','admin']],function (){
         Route::get('/pending',[\App\Http\Controllers\Admin\InvoiceController::class,'pending'])->name('invoices.pending');
         Route::get('/approve/{id}',[\App\Http\Controllers\Admin\InvoiceController::class,'approve'])->name('invoices.approve');
         Route::post('/approve/store/{id}',[\App\Http\Controllers\Admin\InvoiceController::class,'approve_store'])->name('invoices.approve.store');
-        Route::get('/invoice/print/list',[\App\Http\Controllers\Admin\InvoiceController::class,'printList'])->name('invoices.print.list');
-        Route::get('/invoice/print/{id}',[\App\Http\Controllers\Admin\InvoiceController::class,'printInvoice'])->name('invoices.print');
+        Route::get('/print/list',[\App\Http\Controllers\Admin\InvoiceController::class,'printList'])->name('invoices.print.list');
+        Route::get('/print/{id}',[\App\Http\Controllers\Admin\InvoiceController::class,'printInvoice'])->name('invoices.print');
 
-        Route::get('/daily/inoice/report',[\App\Http\Controllers\Admin\InvoiceController::class,'dailyInvoiceReport'])->name('daily.invoice.report');
+        Route::get('/daily/report',[\App\Http\Controllers\Admin\InvoiceController::class,'dailyInvoiceReport'])->name('daily.invoice.report');
 
-        Route::get('/daily/inoice/print',[\App\Http\Controllers\Admin\InvoiceController::class,'dailyReport'])->name('daily.invoice.pdf');
+        Route::get('/daily/print',[\App\Http\Controllers\Admin\InvoiceController::class,'dailyReport'])->name('daily.invoice.pdf');
 
     });
 

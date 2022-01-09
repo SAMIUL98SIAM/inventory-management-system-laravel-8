@@ -200,6 +200,13 @@
                     </a>
                   </li>
 
+                  <li class="nav-item">
+                    <a href="{{route('customers.wise.report')}}" class="nav-link {{$route=='customers.wise.report'?'active':''}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Customer Report</p>
+                    </a>
+                  </li>
+
 
                 </ul>
             </li>
